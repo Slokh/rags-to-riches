@@ -31,6 +31,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,35 +44,24 @@ import static android.Manifest.permission.READ_CONTACTS;
 
 public class RegisterActivity extends LoginActivity{
 
+    private Button mGameButton = null;
 
-    //String h = "Hello world";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        // Set up the login form.
-        // mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
-        //populateAutoComplete();
 
-       /* mPasswordView = (EditText) findViewById(R.id.password);
-        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+
+        mGameButton = (Button) findViewById(R.id.goGameActivity);
+        mGameButton.setOnClickListener(new OnClickListener() {
             @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == R.id.login || id == EditorInfo.IME_NULL) {
-                    attemptLogin();
-                    return true;
-                }
-                return false;
-            }*/
-        }
+            public void onClick(View view) {
+                Intent i = new Intent(view.getContext(),GameActivity.class);
+                startActivity(i);
+                // attemptLogin();
+            }
+        });
 
-
-
-
-
-
-
-
-
+    }
 
 }
