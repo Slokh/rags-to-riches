@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -14,6 +15,17 @@ import android.widget.ListView;
 import com.example.alejandro.app1.adapters.CompanyAdapter;
 import com.example.alejandro.app1.models.Company;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +37,9 @@ public class GameActivity extends AppCompatActivity {
 
     ArrayAdapter<Company> displayAdapter;
     private Button mQuitButton = null;
+    private Button mPortfolioButton = null;
+
+    int amountOfCompanies = 10;
     List<Company> companies;
 
     @Override
@@ -32,12 +47,14 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        String[] companyArray = generateCompanies();
         companies = new ArrayList<Company>();
-        companies.add(new Company("Company A", "A", "A company.", "Apple", 50));
-        companies.add(new Company("Company B", "B", "B company.", "Apple", 50));
-        companies.add(new Company("Company C", "C", "C company.", "Apple", 50));
-        companies.add(new Company("Company D", "D", "D company.", "Apple", 50));
-        companies.add(new Company("Company E", "E", "E company.", "Apple", 50));
+
+        for(int i=0; i<amountOfCompanies; i++) {
+            companies.add(new Company(companyArray[i], "C"+i, "", "", 0));
+        }
 
         Context context = getApplicationContext();
         displayAdapter = new CompanyAdapter(GameActivity.this, context, companies);
@@ -54,5 +71,46 @@ public class GameActivity extends AppCompatActivity {
                 // attemptLogin();
             }
         });
+
+        mPortfolioButton = (Button) findViewById(R.id.portfolioButton);
+        mPortfolioButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // attemptLogin();
+            }
+        });
+    }
+
+    public String[] generateCompanies() {
+        try {
+            URL url = new URL("http://parallel.gg/rags-to-riches/generate-companies.php");
+            HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+            httpURLConnection.setRequestMethod("POST");
+            httpURLConnection.setDoOutput(true);
+            httpURLConnection.setDoInput(true);
+            OutputStream outputStream = httpURLConnection.getOutputStream();
+            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+            String post_data = URLEncoder.encode("amount","UTF-8")+"="+URLEncoder.encode("" + amountOfCompanies,"UTF-8");
+            bufferedWriter.write(post_data);
+            bufferedWriter.flush();
+            bufferedWriter.close();
+            outputStream.close();
+            InputStream inputStream = httpURLConnection.getInputStream();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"iso-8859-1"));
+            String result="";
+            String line="";
+            while((line = bufferedReader.readLine())!= null) {
+                result += line;
+            }
+            bufferedReader.close();
+            inputStream.close();
+            httpURLConnection.disconnect();
+            return result.split(",");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
