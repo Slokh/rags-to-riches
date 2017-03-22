@@ -41,6 +41,7 @@ public class GameActivity extends MainMenuActivity {
 
     int amountOfCompanies = 10;
     List<Company> companies;
+    double[] prices;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +50,12 @@ public class GameActivity extends MainMenuActivity {
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+        prices = new double[amountOfCompanies];
         String[] companyArray = generateCompanies();
         companies = new ArrayList<Company>();
 
         for(int i=0; i<amountOfCompanies; i++) {
-            companies.add(new Company(companyArray[i], "C"+i, "", "", 0));
+            companies.add(new Company(companyArray[i], "C"+i, "", "", prices[i]));
         }
 
         Context context = getApplicationContext();
@@ -105,7 +107,10 @@ public class GameActivity extends MainMenuActivity {
             bufferedReader.close();
             inputStream.close();
             httpURLConnection.disconnect();
-            return result.split(",");
+            for(int i=0; i<result.split("/")[1].split(",").length; i++) {
+                prices[i] = Double.parseDouble(result.split("/")[1].split(",")[i]);
+            }
+            return result.split("/")[0].split(",");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {

@@ -10,9 +10,9 @@ public class Company {
     String ticker;
     String description;
     String realName;
-    int price;
+    double price;
 
-    public Company(String name, String ticker, String description, String realName, int price) {
+    public Company(String name, String ticker, String description, String realName, double price) {
         this.name = name;
         this.ticker = ticker;
         this.description = description;
@@ -22,6 +22,10 @@ public class Company {
 
     public String getName() {
         return name;
+    }
+
+    public double getPrice() {
+        return price;
     }
 
     public String getTicker() {

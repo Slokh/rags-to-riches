@@ -42,10 +42,12 @@ public class CompanyAdapter extends GenericArrayAdapter<Company> {
         if (vi == null)
             vi = mInflater.inflate(R.layout.layout_listrow, null);
         TextView text = (TextView) vi.findViewById(R.id.companyText);
+        TextView price = (TextView) vi.findViewById(R.id.companyPrice);
         Button buyButton = (Button) vi.findViewById(R.id.companyBuyButton);
         Button sellButton = (Button) vi.findViewById(R.id.companySellButton);
 
         text.setText(data.get(position).getName());
+        price.setText(data.get(position).getPrice() + "");
 
         buyButton.setOnClickListener(new View.OnClickListener() {
             @Override

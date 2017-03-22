@@ -10,18 +10,25 @@
         android:id="@+id/companyText"
         android:clickable="true"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:id="@+id/companyPrice"
+        android:clickable="true" />
+
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="40dp"
         android:layout_height="wrap_content"
         android:id="@+id/companyBuyButton"
-        android:text="Buy"
+        android:text="B"
         android:focusable="false"/>
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="41dp"
         android:layout_height="wrap_content"
         android:id="@+id/companySellButton"
-        android:text="Sell"
+        android:text="S"
         android:focusable="false"/>
 
 
