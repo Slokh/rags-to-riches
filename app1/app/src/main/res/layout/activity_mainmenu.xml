@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <TextClock
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textClock"
+        android:textSize="18sp"
+        android:background="@color/colorPrimaryDark" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="165dp"
+            app:srcCompat="@drawable/android"
+            android:id="@+id/AccountInformation"
+            android:scaleType="centerInside"
+            android:background="@color/colorPrimaryDark"
+            android:elevation="1dp" />
+
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="165dp"
+            app:srcCompat="@drawable/android"
+            android:id="@+id/Game_Modes"
+            android:scaleType="centerInside"
+            android:textAlignment="center"
+            android:text ="Game Modes"
+            android:background="@color/colorPrimaryDark"
+            tools:text="@string/Game_Modes"
+            android:layout_below="@+id/AccountInformation"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="165dp"
+            app:srcCompat="@drawable/android"
+            android:id="@+id/goSettingsActivity"
+            android:scaleType="centerInside"
+            android:background="@color/colorPrimaryDark"
+            android:elevation="1dp"
+            android:layout_below="@+id/Game_Modes"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_height="wrap_content"
+            tools:text="Game Modes"
+            android:typeface="normal"
+            android:text="Game Modes"
+            android:fontFamily="sans-serif"
+            android:visibility="visible"
+            android:textColor="@android:color/background_dark"
+            android:layout_above="@+id/Game_Modes"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="71dp"
+            android:layout_width="match_parent"
+            android:textAlignment="center"
+            android:textSize="12sp" />
+
+        <TextView
+            android:text="User Porfolio "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView4"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:textColor="@android:color/background_dark"
+            android:textAlignment="center"
+            android:textSize="12sp" />
+
+        <TextView
+            android:text="Settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="63dp"
+            android:id="@+id/textView7"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_dark" />
+
+    </RelativeLayout>
+
+</LinearLayout>

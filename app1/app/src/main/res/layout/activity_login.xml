@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textView"
-        android:textSize="14sp"
+        android:textSize="24sp"
         android:textAlignment="center"
         tools:text="Welcome" />
 

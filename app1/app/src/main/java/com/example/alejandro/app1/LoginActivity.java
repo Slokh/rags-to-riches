@@ -87,17 +87,23 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         });
 
         mEmailSignInButton = (Button) findViewById(R.id.goRegisterActivity);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(view.getContext(),RegisterActivity.class);
-                startActivity(i);
-                // attemptLogin();
-            }
-        });
 
-       // mLoginFormView = findViewById(R.id.login_form);
-        //mProgressView = findViewById(R.id.login_progress);
+        //if(attemptLogin() == false) {
+        //    mEmailSignInButton.setError("Please fill out information accurately!");
+       // }else {
+            mEmailSignInButton.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    Intent i = new Intent(view.getContext(), RegisterActivity.class);
+                    startActivity(i);
+
+                }
+            });
+
+            mLoginFormView = findViewById(R.id.login_form);
+            mProgressView = findViewById(R.id.login_progress);
+        //}
     }
 
     private void populateAutoComplete() {
@@ -149,9 +155,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * If there are form errors (invalid email, missing fields, etc.), the
      * errors are presented and no actual login attempt is made.
      */
-    private void attemptLogin() {
+    private boolean attemptLogin() {
         if (mAuthTask != null) {
-            return;
+            return false;
         }
 
         // Reset errors.
@@ -194,6 +200,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
         }
+        return true;
     }
 
     private boolean isEmailValid(String email) {
