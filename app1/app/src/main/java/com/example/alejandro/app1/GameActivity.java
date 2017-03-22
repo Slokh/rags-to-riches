@@ -62,11 +62,11 @@ public class GameActivity extends MainMenuActivity {
         ListView listView = (ListView) findViewById(R.id.companyList);
         listView.setAdapter(displayAdapter);
 
-        mQuitButton = (Button) findViewById(R.id.quitButton);
+        mQuitButton = (Button) findViewById(R.id.goMainMenuActivity);
         mQuitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(view.getContext(),RegisterActivity.class);
+                Intent i = new Intent(view.getContext(),MainMenuActivity.class);
                 startActivity(i);
                 // attemptLogin();
             }
