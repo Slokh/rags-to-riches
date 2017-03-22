@@ -11,17 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:text="Settings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="63dp"
-            android:id="@+id/textView7"
-            android:textAlignment="center"
-            android:textColor="@android:color/background_dark" />
-
         <ImageButton
             android:layout_width="match_parent"
             android:layout_height="165dp"
@@ -29,36 +18,8 @@
             android:id="@+id/goSettingsActivity"
             android:scaleType="centerInside"
             android:background="@color/colorPrimaryDark"
-            android:elevation="1dp"
+            android:elevation="0dp"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:text="User Porfolio "
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView4"
-            android:textColor="@android:color/background_dark"
-            android:textAlignment="center"
-            android:textSize="12sp"
-            android:layout_alignParentTop="true"
-            android:layout_alignLeft="@+id/textView4"
-            android:layout_alignStart="@+id/textView4"
-            android:layout_marginTop="73dp" />
-
-        <TextView
-            android:layout_height="wrap_content"
-            tools:text="Game Modes"
-            android:typeface="normal"
-            android:text="Game Modes"
-            android:fontFamily="sans-serif"
-            android:visibility="visible"
-            android:textColor="@android:color/background_dark"
-            android:layout_width="match_parent"
-            android:textAlignment="center"
-            android:textSize="12sp"
-            android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
@@ -84,7 +45,8 @@
             tools:text="@string/Game_Modes"
             android:layout_above="@+id/goSettingsActivity"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:elevation="0dp" />
 
         <ImageButton
             android:layout_width="match_parent"
@@ -93,10 +55,49 @@
             android:id="@+id/AccountInformation"
             android:scaleType="centerInside"
             android:background="@color/colorPrimaryDark"
-            android:elevation="1dp"
+            android:elevation="0dp"
             android:layout_below="@+id/textClock"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
+
+        <TextView
+            android:text="Settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView7"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_dark"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="67dp" />
+
+        <TextView
+            android:text="User Porfolio "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView4"
+            android:textColor="@android:color/background_dark"
+            android:textAlignment="center"
+            android:textSize="12sp"
+            android:layout_above="@+id/goGameAcitivy"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="64dp" />
+
+        <TextView
+            android:layout_height="wrap_content"
+            tools:text="Game Modes"
+            android:typeface="normal"
+            android:text="Game Modes"
+            android:fontFamily="sans-serif"
+            android:visibility="visible"
+            android:textColor="@android:color/background_dark"
+            android:layout_width="match_parent"
+            android:textAlignment="center"
+            android:textSize="12sp"
+            android:layout_above="@+id/goSettingsActivity"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="67dp" />
 
     </RelativeLayout>
 
