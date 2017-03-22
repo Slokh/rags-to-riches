@@ -22,7 +22,7 @@
     <string name="prompt_username">UserName</string>
     <string name="action_go_to_game">Create</string>
     <string name="Game_Modes">Games</string>
-    <string name="AccountInformation">info</string>
+    <string name="Account_Information">info</string>
     <string name="Settings">Settings</string>
     <string name="Title_Games">TitleGames</string>
     <string name="Title_AccountInformation">Title_info</string>

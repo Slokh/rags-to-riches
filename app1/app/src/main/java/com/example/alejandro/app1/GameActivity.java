@@ -33,7 +33,7 @@ import java.util.List;
  * Created by Kartik on 3/20/2017.
  */
 
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends MainMenuActivity {
 
     ArrayAdapter<Company> displayAdapter;
     private Button mQuitButton = null;

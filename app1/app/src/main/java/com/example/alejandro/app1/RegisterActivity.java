@@ -44,20 +44,17 @@ import static android.Manifest.permission.READ_CONTACTS;
 
 public class RegisterActivity extends LoginActivity{
 
-<<<<<<< Updated upstream
-    private Button mGameButton = null;
 
-=======
+
+
     private Button mCreate = null;
     //String h = "Hello world";
->>>>>>> Stashed changes
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-<<<<<<< Updated upstream
-=======
-        // Set up the login form.
+ // Set up the login form.
         // mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         //populateAutoComplete();
 
@@ -82,26 +79,6 @@ public class RegisterActivity extends LoginActivity{
             }
         });
 
-        }
-
-
-
-
-
-
-
->>>>>>> Stashed changes
-
-
-        mGameButton = (Button) findViewById(R.id.goGameActivity);
-        mGameButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(view.getContext(),GameActivity.class);
-                startActivity(i);
-                // attemptLogin();
-            }
-        });
 
     }
 

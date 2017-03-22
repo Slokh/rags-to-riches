@@ -51,34 +51,33 @@ import static android.Manifest.permission.READ_CONTACTS;
 public class MainMenuActivity extends RegisterActivity {
 
     private ImageButton mSetting = null;
+    private ImageButton mGame = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainmenu);
-        // Set up the login form.
-        // mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
-        //populateAutoComplete();
 
-       /* mPasswordView = (EditText) findViewById(R.id.password);
-        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        mGame = (ImageButton) findViewById(R.id.goGameAcitivy);
+        mGame.setOnClickListener(new OnClickListener() {
             @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == R.id.login || id == EditorInfo.IME_NULL) {
-                    attemptLogin();
-                    return true;
-                }
-                return false;
-            }*/
+            public void onClick(View view) {
+                Intent a = new Intent(view.getContext(), GameActivity.class);
+                startActivity(a);
+                // attemptLogin();
+            }
+
+        });
 
         mSetting = (ImageButton) findViewById(R.id.goSettingsActivity);
         mSetting.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(view.getContext(),SettingsActivity.class);
+                Intent i = new Intent(view.getContext(), SettingsActivity.class);
                 startActivity(i);
                 // attemptLogin();
-            }
+                }
+
         });
 
     }

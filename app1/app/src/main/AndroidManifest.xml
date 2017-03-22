@@ -25,16 +25,13 @@
         </activity>
         <activity
             android:name=".RegisterActivity"
-<<<<<<< Updated upstream
             android:label="app1"/>
-        <activity
-            android:name=".GameActivity"
-            android:label="app1"/>
-=======
-            android:label="app1" />
         <activity
             android:name=".MainMenuActivity"
             android:label="app1" />
+        <activity
+            android:name=".GameActivity"
+            android:label="app1"/>
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
@@ -43,7 +40,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.alejandro.app1.MainMenuActivity" />
         </activity>
->>>>>>> Stashed changes
+
     </application>
 
 </manifest>
