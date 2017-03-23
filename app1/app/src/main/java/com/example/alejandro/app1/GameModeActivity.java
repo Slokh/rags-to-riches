@@ -15,6 +15,7 @@ import com.example.alejandro.app1.R;
 public class GameModeActivity extends MainMenuActivity {
 
     private Button mGamePublic = null;
+    private Button mBackButton = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +26,17 @@ public class GameModeActivity extends MainMenuActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(view.getContext(), GameActivity.class);
+                startActivity(i);
+                // attemptLogin();
+            }
+
+        });
+
+        mGamePublic = (Button) findViewById(R.id.backButton);
+        mGamePublic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(view.getContext(), MainMenuActivity.class);
                 startActivity(i);
                 // attemptLogin();
             }

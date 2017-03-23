@@ -62,7 +62,7 @@
                     android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Password(Must be 9 characters)"
+                    android:hint="Password"
                     android:imeActionId="@+id/login"
                     android:imeActionLabel="@string/action_sign_in_short"
                     android:imeOptions="actionUnspecified"
@@ -72,14 +72,32 @@
 
             </android.support.design.widget.TextInputLayout>
 
-            <Button
-                android:id="@+id/goRegisterActivity"
-                style="?android:textAppearanceSmall"
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/action_sign_in"
-                android:textStyle="bold" />
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/goRegisterActivity"
+                    style="?android:textAppearanceSmall"
+                    android:layout_width="148dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/action_register"
+                    android:textStyle="bold"
+                    android:layout_weight="0.37" />
+
+                <Button
+                    android:id="@+id/goLoginActivity"
+                    style="?android:textAppearanceSmall"
+                    android:layout_width="148dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/action_sign_in"
+                    android:textStyle="bold"
+                    android:layout_weight="0.37" />
+
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
