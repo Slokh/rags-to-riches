@@ -9,35 +9,15 @@ import java.util.Map;
 
 public class Portfolio {
 
-    String userName;
-    int gameID;
-    int rank;
-    int credits;
+    int id;
     Map<Company, Integer> stocks;
 
-    public Portfolio(String userName, int gameID, int rank, int credits) {
-        this.userName = userName;
-        this.gameID = gameID;
-        this.rank = rank;
-        this.credits = credits;
-        stocks = new HashMap<Company, Integer>();
+    public Portfolio(int id, Map<Company, Integer> stocks) {
+        this.id = id;
+        this.stocks = stocks;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public int getGameID() {
-        return gameID;
-    }
-
-    public int getRank() {
-        return rank;
-    }
-
-    public int getCredits() {
-        return credits;
-    }
+    public int getId() { return  id; }
 
     public Map<Company, Integer> getStocks() {
         return stocks;
@@ -49,13 +29,5 @@ public class Portfolio {
 
     public void updateStock(Company company, int amount) {
         stocks.put(company, amount);
-    }
-
-    public void setRank(int rank) {
-        this.rank = rank;
-    }
-
-    public void setCredits(int credits) {
-        this.credits = credits;
     }
 }

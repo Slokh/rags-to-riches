@@ -83,6 +83,10 @@ public class LoginActivity extends AppCompatActivity {
                     Account account = validateLogin();
                     if(account != null) {
                         Intent i = new Intent(view.getContext(), MainMenuActivity.class);
+                        i.putExtra("id", account.getId());
+                        i.putExtra("email", account.getEmail());
+                        i.putExtra("username", account.getUsername());
+                        i.putExtra("password", account.getPassword());
                         startActivity(i);
                     }
                 }

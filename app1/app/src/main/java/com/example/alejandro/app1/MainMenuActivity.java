@@ -27,12 +27,17 @@ public class MainMenuActivity extends RegisterActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainmenu);
+        final Bundle extras = getIntent().getExtras();
 
         mGameMode = (ImageButton) findViewById(R.id.goGameModeActivity);
         mGameMode.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent a = new Intent(view.getContext(), GameModeActivity.class);
+                a.putExtra("id", extras.getInt("id"));
+                a.putExtra("email", extras.getString("email"));
+                a.putExtra("username", extras.getString("username"));
+                a.putExtra("password", extras.getString("password"));
                 startActivity(a);
                 // attemptLogin();
             }

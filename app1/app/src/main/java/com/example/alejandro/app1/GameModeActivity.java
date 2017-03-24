@@ -20,12 +20,17 @@ public class GameModeActivity extends MainMenuActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_mode);
+        final Bundle extras = getIntent().getExtras();
 
         mGamePublic = (Button) findViewById(R.id.goGameActivity);
         mGamePublic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(view.getContext(), GameActivity.class);
+                i.putExtra("id", extras.getInt("id"));
+                i.putExtra("email", extras.getString("email"));
+                i.putExtra("username", extras.getString("username"));
+                i.putExtra("password", extras.getString("password"));
                 startActivity(i);
                 // attemptLogin();
             }

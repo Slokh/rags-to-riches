@@ -19,10 +19,13 @@ import com.example.alejandro.app1.GameActivity;
 import com.example.alejandro.app1.MainMenuActivity;
 import com.example.alejandro.app1.R;
 import com.example.alejandro.app1.models.Company;
+import com.example.alejandro.app1.models.Account;
+import com.example.alejandro.app1.models.Portfolio;
 
 import java.util.List;
 
 import static android.R.attr.path;
+import static android.R.attr.port;
 
 /**
  * Created by Kartik on 3/20/2017.
@@ -32,10 +35,14 @@ public class CompanyAdapter extends GenericArrayAdapter<Company> implements Numb
 
     private List<Company> companies;
     private Activity activity;
+    private Account account;
+    private Portfolio portfolio;
 
-    public CompanyAdapter(Activity activity, Context context, List<Company> companies) {
+    public CompanyAdapter(Activity activity, Context context, Account account, Portfolio portfolio, List<Company> companies) {
         super(context, companies);
         this.activity = activity;
+        this.account = account;
+        this.portfolio = portfolio;
     }
 
     @Override
@@ -56,8 +63,10 @@ public class CompanyAdapter extends GenericArrayAdapter<Company> implements Numb
         ImageView imageView = (ImageView) vi.findViewById(R.id.companyImage);
         imageView.setBackgroundColor(Color.GRAY);
 
-        text.setText(data.get(position).getName());
-        price.setText(data.get(position).getPrice() + "");
+        final Company company = data.get(position);
+
+        text.setText(company.getName());
+        price.setText(company.getPrice() + "");
 
 
         buyButton.setOnClickListener(new View.OnClickListener() {
@@ -78,6 +87,7 @@ public class CompanyAdapter extends GenericArrayAdapter<Company> implements Numb
                     @Override
                     public void onClick(final View v) {
                         dialogPicker.dismiss();
+                        portfolio.updateStock(company,portfolio.getAmountOfStock(company)+np.getValue());
                         AlertDialog alertDialog = new AlertDialog.Builder(activity).create();
                         alertDialog.setTitle("Success!");
                         alertDialog.setMessage("Bought " + String.valueOf(np.getValue()) + " stocks!");
@@ -119,16 +129,30 @@ public class CompanyAdapter extends GenericArrayAdapter<Company> implements Numb
                     @Override
                     public void onClick(final View v) {
                         dialogPicker.dismiss();
-                        AlertDialog alertDialog = new AlertDialog.Builder(activity).create();
-                        alertDialog.setTitle("Success!");
-                        alertDialog.setMessage("Sold " + String.valueOf(np.getValue()) + " stocks!");
-                        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialogSuccess, int which) {
-                                        dialogSuccess.dismiss();
-                                    }
-                                });
-                        alertDialog.show();
+                        if(portfolio.getAmountOfStock(company)-np.getValue() >= 0) {
+                            portfolio.updateStock(company, portfolio.getAmountOfStock(company) - np.getValue());
+                            AlertDialog alertDialog = new AlertDialog.Builder(activity).create();
+                            alertDialog.setTitle("Success!");
+                            alertDialog.setMessage("Sold " + String.valueOf(np.getValue()) + " stocks!");
+                            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialogSuccess, int which) {
+                                            dialogSuccess.dismiss();
+                                        }
+                                    });
+                            alertDialog.show();
+                        } else {
+                            AlertDialog alertDialog = new AlertDialog.Builder(activity).create();
+                            alertDialog.setTitle("Error!");
+                            alertDialog.setMessage("Not enough stocks to sell!");
+                            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialogSuccess, int which) {
+                                            dialogSuccess.dismiss();
+                                        }
+                                    });
+                            alertDialog.show();
+                        }
                     }
                 });
                 cancel.setOnClickListener(new View.OnClickListener()
