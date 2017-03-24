@@ -11,21 +11,29 @@ public class Company {
     String description;
     String realName;
     double price;
+    double[] priceHistory;
 
-    public Company(String name, String ticker, String description, String realName, double price) {
+    public Company(String name, String ticker, String realName, double[] priceHistory) {
         this.name = name;
         this.ticker = ticker;
-        this.description = description;
         this.realName = realName;
-        this.price = price;
+        this.priceHistory = priceHistory;
+        this.price = priceHistory[0];
+        this.description = "";
     }
 
     public String getName() {
         return name;
     }
 
-    public double getPrice() {
-        return price;
+    public double getPrice() { return price; }
+
+    public double getPriceAt(int i) {
+        return priceHistory[i];
+    }
+
+    public double[] getPriceHistory() {
+        return priceHistory;
     }
 
     public String getTicker() {
@@ -40,7 +48,7 @@ public class Company {
         return realName;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 }

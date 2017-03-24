@@ -49,6 +49,7 @@ import java.sql.*;
 
 import static android.Manifest.permission.READ_CONTACTS;
 import static com.example.alejandro.app1.R.id.username;
+import com.example.alejandro.app1.models.Account;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -78,9 +79,12 @@ public class LoginActivity extends AppCompatActivity {
         mLoginButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(attemptLogin() && validateLogin()) {
-                    Intent i = new Intent(view.getContext(), MainMenuActivity.class);
-                    startActivity(i);
+                if(attemptLogin()) {
+                    Account account = validateLogin();
+                    if(account != null) {
+                        Intent i = new Intent(view.getContext(), MainMenuActivity.class);
+                        startActivity(i);
+                    }
                 }
             }
         });
@@ -144,7 +148,7 @@ public class LoginActivity extends AppCompatActivity {
         return true;
     }
 
-    private boolean validateLogin() {
+    private Account validateLogin() {
         // Reset errors.
         mEmailView.setError(null);
         mPasswordView.setError(null);
@@ -188,16 +192,17 @@ public class LoginActivity extends AppCompatActivity {
                 focusView = mEmailView;
                 focusView = mPasswordView;
                 focusView.requestFocus();
-                return false;
-            } else if(result.equals("TRUE")) {
-                return true;
+                return null;
+            } else {
+                String[] split = result.split("/");
+                return new Account(Integer.parseInt(split[0]), split[1], split[2], split[3]);
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return false;
+        return null;
     }
 
     private boolean isEmailValid(String email) {
@@ -208,4 +213,3 @@ public class LoginActivity extends AppCompatActivity {
         return password.length() > 4;
     }
 }
-

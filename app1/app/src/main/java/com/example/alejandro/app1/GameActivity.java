@@ -1,16 +1,22 @@
 package com.example.alejandro.app1;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.LoaderManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.NumberPicker;
 
 import com.example.alejandro.app1.adapters.CompanyAdapter;
 import com.example.alejandro.app1.models.Company;
@@ -37,7 +43,6 @@ public class GameActivity extends MainMenuActivity {
 
     ArrayAdapter<Company> displayAdapter;
     private Button mQuitButton = null;
-    private Button mPortfolioButton = null;
 
     int amountOfCompanies = 10;
     List<Company> companies;
@@ -51,18 +56,15 @@ public class GameActivity extends MainMenuActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         prices = new double[amountOfCompanies];
-        String[] companyArray = generateCompanies();
         companies = new ArrayList<Company>();
-
-        for(int i=0; i<amountOfCompanies; i++) {
-            companies.add(new Company(companyArray[i], "C"+i, "", "", prices[i]));
-        }
+        generateCompanies();
 
         Context context = getApplicationContext();
         displayAdapter = new CompanyAdapter(GameActivity.this, context, companies);
 
         ListView listView = (ListView) findViewById(R.id.companyList);
         listView.setAdapter(displayAdapter);
+        listView.setBackgroundColor(Color.WHITE);
 
         mQuitButton = (Button) findViewById(R.id.goMainMenuActivity);
         mQuitButton.setOnClickListener(new View.OnClickListener() {
@@ -70,20 +72,11 @@ public class GameActivity extends MainMenuActivity {
             public void onClick(View view) {
                 Intent i = new Intent(view.getContext(),MainMenuActivity.class);
                 startActivity(i);
-                // attemptLogin();
-            }
-        });
-
-        mPortfolioButton = (Button) findViewById(R.id.portfolioButton);
-        mPortfolioButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // attemptLogin();
             }
         });
     }
 
-    public String[] generateCompanies() {
+    public void generateCompanies() {
         try {
             URL url = new URL("http://parallel.gg/rags-to-riches/generate-companies.php");
             HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
@@ -107,15 +100,26 @@ public class GameActivity extends MainMenuActivity {
             bufferedReader.close();
             inputStream.close();
             httpURLConnection.disconnect();
-            for(int i=0; i<result.split("/")[1].split(",").length; i++) {
-                prices[i] = Double.parseDouble(result.split("/")[1].split(",")[i]);
-            }
-            return result.split("/")[0].split(",");
+            parseCompanies(result);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+    }
+
+    public void parseCompanies(String result) {
+        String[] companyObjects = result.split("/");
+        for(String companyObject : companyObjects) {
+            String[] split = companyObject.split(",");
+            String realName = split[0];
+            String gameName = split[1];
+            String ticker = split[2];
+            double[] prices = new double[50];
+            for(int i=0; i<50; i++) {
+                prices[i] = Double.parseDouble(split[i+3]);
+            }
+            companies.add(new Company(gameName, ticker, realName, prices));
+        }
     }
 }
