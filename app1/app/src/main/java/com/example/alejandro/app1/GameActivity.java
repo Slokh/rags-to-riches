@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -20,7 +22,7 @@ import android.widget.NumberPicker;
 import android.widget.EditText;
 import com.example.alejandro.app1.adapters.CompanyAdapter;
 import com.example.alejandro.app1.models.Company;
-
+import android.view.ViewGroup;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -39,15 +41,26 @@ import com.example.alejandro.app1.models.Account;
 import com.example.alejandro.app1.models.Portfolio;
 import android.widget.TextView;
 import static android.R.id.message;
+import static com.example.alejandro.app1.R.id.relativeLayout;
+import static java.sql.Types.NULL;
+
+import android.widget.PopupWindow;
+import android.view.LayoutInflater;
 
 
 
 public class GameActivity extends MainMenuActivity {
 
     ArrayAdapter<Company> displayAdapter;
+
     private Button mQuitButton = null;
     private Button mPortfolioButton = null;
     private Button mNextTurnButton = null;
+    private Button mStandingsButton = null;
+
+    private Button test;
+    private PopupWindow popupWindow;
+    private LayoutInflater layoutInflater;
 
     int amountOfCompanies = 10;
     List<Company> companies;
@@ -77,21 +90,34 @@ public class GameActivity extends MainMenuActivity {
                     mNextTurnButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+                            mNextTurnButton.setText("waiting for other player...");
+                            runOnUiThread(new Runnable() { @Override public void run() {
 
+                                mNextTurnButton.setText("waiting for other player...");
+
+                            }
+                            });
+
+                            try {
+
+                                Thread.sleep(005);
+                            }catch(InterruptedException e ){
+                                e.printStackTrace();
+                            }
                             // stocks should update to next week here
-                            timercount = 120;
+                            timercount = 119;
                         }
                     });
 
 
-                    Thread.sleep(995);
+                    Thread.sleep(1000);
                     timercount--;
 
 
                     if (timercount == 0){
 
                         //
-                        // stocks should update now and turn count should increase by 1
+                        // stocks should update to next now and turn count should increase by 1
                         //
 
                         timercount = 120;
@@ -165,7 +191,31 @@ public class GameActivity extends MainMenuActivity {
                 alertDialog.show();
             }
         });
-    }
+
+
+        mStandingsButton = (Button) findViewById(R.id.standingsButton);
+
+        mStandingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog alertDialog = new AlertDialog.Builder(GameActivity.this).create();
+                alertDialog.setTitle("Standings");
+
+                String message = "You: \nPlayer 2: \nPlayer 3: \nPlayer 4: \n";
+
+
+                alertDialog.setMessage(message);
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialogSuccess, int which) {
+                                dialogSuccess.dismiss();
+                            }
+                        });
+                alertDialog.show();
+            }
+        });}
+
+
 
     public void generateCompanies() {
         try {
