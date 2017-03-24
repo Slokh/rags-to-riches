@@ -17,7 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.NumberPicker;
-
+import android.widget.EditText;
 import com.example.alejandro.app1.adapters.CompanyAdapter;
 import com.example.alejandro.app1.models.Company;
 
@@ -37,24 +37,24 @@ import java.util.HashMap;
 import java.util.List;
 import com.example.alejandro.app1.models.Account;
 import com.example.alejandro.app1.models.Portfolio;
-
+import android.widget.TextView;
 import static android.R.id.message;
 
-/**
- * Created by Kartik on 3/20/2017.
- */
+
 
 public class GameActivity extends MainMenuActivity {
 
     ArrayAdapter<Company> displayAdapter;
     private Button mQuitButton = null;
     private Button mPortfolioButton = null;
+    private Button mNextTurnButton = null;
 
     int amountOfCompanies = 10;
     List<Company> companies;
     double[] prices;
     Account account;
     Portfolio portfolio;
+    int timercount = 120;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +62,63 @@ public class GameActivity extends MainMenuActivity {
         setContentView(R.layout.activity_game);
         final Bundle extras = getIntent().getExtras();
         account = new Account(extras.getInt("id"), extras.getString("email"), extras.getString("username"), extras.getString("password"));
+
+
+
+        mNextTurnButton = (Button) findViewById(R.id.editRemainingTimeTextButton);
+
+
+        Thread t = new Thread(){
+            @Override public void run(){
+            while(!isInterrupted()){
+
+                try {
+
+                    mNextTurnButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            // stocks should update to next week here
+                            timercount = 120;
+                        }
+                    });
+
+
+                    Thread.sleep(995);
+                    timercount--;
+
+
+                    if (timercount == 0){
+
+                        //
+                        // stocks should update now and turn count should increase by 1
+                        //
+
+                        timercount = 120;
+
+
+                    }
+
+                    runOnUiThread(new Runnable() { @Override public void run() {
+                        mNextTurnButton.setText("Next turn: " + String.valueOf(timercount/60) + ":" + String.valueOf(timercount % 60));
+                    }
+                    });
+
+
+                }catch(InterruptedException e ){
+                    e.printStackTrace();
+
+                }
+
+            }
+
+            }
+
+        };
+
+        t.start();
+
+
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
