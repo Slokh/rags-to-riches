@@ -43,16 +43,18 @@ import android.widget.TextView;
 import static android.R.id.message;
 import static com.example.alejandro.app1.R.id.relativeLayout;
 import static java.sql.Types.NULL;
-
+import android.view.View;
 import android.widget.PopupWindow;
 import android.view.LayoutInflater;
-
+import android.widget.EditText;
+import android.content.Intent;
 
 
 public class GameActivity extends MainMenuActivity {
 
     ArrayAdapter<Company> displayAdapter;
-
+    TextView turnCount;
+    TextView balanceAmount;
     private Button mQuitButton = null;
     private Button mPortfolioButton = null;
     private Button mNextTurnButton = null;
@@ -61,21 +63,31 @@ public class GameActivity extends MainMenuActivity {
     private Button test;
     private PopupWindow popupWindow;
     private LayoutInflater layoutInflater;
-
+    double Standingsarray[];
     int amountOfCompanies = 10;
     List<Company> companies;
     double[] prices;
     Account account;
     Portfolio portfolio;
     int timercount = 120;
-
+    int turnvalue = 1;
+    double balance = 5000;
     @Override
+
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         final Bundle extras = getIntent().getExtras();
         account = new Account(extras.getInt("id"), extras.getString("email"), extras.getString("username"), extras.getString("password"));
 
+        turnCount = (TextView) findViewById(R.id.turnCount);
+        turnCount.setText("Turn: " + String.valueOf(turnvalue));
+
+
+        balanceAmount = (TextView) findViewById(R.id.balanceAmount);
+        balanceAmount.setText("Your Balance: " + String.valueOf(balance));
 
 
         mNextTurnButton = (Button) findViewById(R.id.editRemainingTimeTextButton);
@@ -85,12 +97,21 @@ public class GameActivity extends MainMenuActivity {
             @Override public void run(){
             while(!isInterrupted()){
 
+                if (turnvalue == 25){
+ //                       Intent i = new Intent(GameActivity.this, GameResultsActivity.class);
+ //                      startActivity(i);
+
+                }
+
+
                 try {
 
                     mNextTurnButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+                            turnvalue++;
                             mNextTurnButton.setText("waiting for other player...");
+                            turnCount.setText("Turn: " + String.valueOf(turnvalue));
                             runOnUiThread(new Runnable() { @Override public void run() {
 
                                 mNextTurnButton.setText("waiting for other player...");
@@ -106,6 +127,8 @@ public class GameActivity extends MainMenuActivity {
                             }
                             // stocks should update to next week here
                             timercount = 119;
+
+                            turnCount.setText("Turn: " + String.valueOf(turnvalue));
                         }
                     });
 
@@ -117,11 +140,17 @@ public class GameActivity extends MainMenuActivity {
                     if (timercount == 0){
 
                         //
-                        // stocks should update to next now and turn count should increase by 1
-                        //
+                        // stocks should update to next week
 
+                        turnvalue++;
+                        turnCount.setText("Turn: " + String.valueOf(turnvalue));
                         timercount = 120;
 
+                        if (turnvalue == 25){
+ //                           Intent i = new Intent(GameActivity.this, GameResultsActivity.class);
+ //                           startActivity(i);
+
+                        }
 
                     }
 
@@ -201,7 +230,19 @@ public class GameActivity extends MainMenuActivity {
                 AlertDialog alertDialog = new AlertDialog.Builder(GameActivity.this).create();
                 alertDialog.setTitle("Standings");
 
-                String message = "You: \nPlayer 2: \nPlayer 3: \nPlayer 4: \n";
+
+                // player 2, 3, 4 balance amounts should update here from server:
+                //
+                //
+
+
+                double Standingsarray[] = {(Math. random() * 9999 + 1000),(Math. random() * 9999 + 1000),(Math. random() * 9999 + 1000)};
+
+                //
+                //
+                //
+
+                String message = "You: " + String.valueOf(5000) + "\nPlayer 2: "+ Standingsarray[0] + " \nPlayer 3: " + Standingsarray[1] + "\nPlayer 4: " + Standingsarray[2] +"\n";
 
 
                 alertDialog.setMessage(message);
@@ -290,9 +331,9 @@ public class GameActivity extends MainMenuActivity {
             while((line = bufferedReader.readLine())!= null) {
                 result += line;
             }
-            System.out.println(result);
             bufferedReader.close();
             inputStream.close();
+            System.out.println(result);
             httpURLConnection.disconnect();
             return new Portfolio(account.getId(), parsePortfolio(result));
         } catch (MalformedURLException e) {

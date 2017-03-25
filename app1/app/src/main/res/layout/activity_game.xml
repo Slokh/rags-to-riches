@@ -20,7 +20,7 @@
         android:layout_row="0"
         android:text="@string/action_quit"
         android:textStyle="bold"
-        android:layout_above="@+id/relativeLayout2"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -33,16 +33,17 @@
         android:layout_height="357dp"
         android:weightSum="1"
         android:background="@android:color/darker_gray"
-        android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/relativeLayout2">
+        android:id="@+id/relativeLayout2"
+        android:layout_below="@+id/goMainMenuActivity"
+        android:layout_above="@+id/portfolioButton">
 
         <ListView
             android:id="@+id/companyList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_centerVertical="true"
+            android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
@@ -61,16 +62,14 @@
         style="?android:textAppearanceSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:layout_column="2"
-        android:layout_marginLeft="15dp"
-        android:layout_marginStart="15dp"
         android:layout_row="3"
         android:layout_weight="1"
         android:text="@string/action_portfolio"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/goMainMenuActivity"
+        android:layout_alignEnd="@+id/goMainMenuActivity" />
 
     <Button
         android:id="@+id/standingsButton"
@@ -92,9 +91,35 @@
         android:id="@+id/editRemainingTimeTextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
-        android:layout_above="@+id/relativeLayout2"
+        android:text="Turn Timer"
+        android:layout_below="@+id/relativeLayout"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:id="@+id/turnCount"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:text="turnCount" android:inputType="text"
+        android:layout_marginLeft="34dp"
+        android:layout_marginStart="34dp"
+        android:layout_alignBaseline="@+id/editRemainingTimeTextButton"
+        android:layout_alignBottom="@+id/editRemainingTimeTextButton"
+        android:layout_toRightOf="@+id/goMainMenuActivity"
+        android:layout_toEndOf="@+id/goMainMenuActivity" />
+
+    <TextView
+        android:id="@+id/balanceAmount"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:text="balance" android:inputType="text"
+        android:layout_marginLeft="21dp"
+        android:layout_marginStart="21dp"
+        android:layout_alignBaseline="@+id/standingsButton"
+        android:layout_alignBottom="@+id/standingsButton"
+        android:layout_toRightOf="@+id/portfolioButton"
+        android:layout_toEndOf="@+id/portfolioButton" />
 
 </RelativeLayout>

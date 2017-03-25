@@ -106,5 +106,6 @@
 
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="title_activity_game_mode">GameModeActivity</string>
+    <string name="title_activity_game_results">GameResultsActivity</string>
 
 </resources>
