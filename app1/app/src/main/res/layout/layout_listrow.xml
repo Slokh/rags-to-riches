@@ -21,9 +21,8 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="194dp"
-        android:layout_height="match_parent"
-        android:layout_weight="0.66">
+        android:layout_width="154dp"
+        android:layout_height="match_parent">
 
         <TextView android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -32,9 +31,8 @@
 
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_width="151dp"
+            android:layout_height="match_parent">
 
             <TextView
                 android:text="Price: "
@@ -51,6 +49,15 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/companyInfoButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        android:text="More Info" />
+
+
 
     <Button
         android:layout_width="40dp"

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <TextView
+        android:id="@+id/StockTitle"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.22"
+        android:text="Stock Trend"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="19dp" />
+
+    <TextView
+        android:id="@+id/stockinfoFirstLine"
+        android:layout_width="341dp"
+        android:layout_height="20dp"
+        android:layout_weight="0.22"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:layout_below="@+id/StockTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="21dp" />
+
+    <TextView
+        android:id="@+id/secondLine"
+        android:layout_width="341dp"
+        android:layout_height="20dp"
+        android:layout_weight="0.22"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:layout_below="@+id/StockTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="42dp" />
+    <TextView
+        android:id="@+id/ThirdLine"
+        android:layout_width="341dp"
+        android:layout_height="20dp"
+        android:layout_weight="0.22"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:layout_below="@+id/StockTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="63dp" />
+    <TextView
+        android:id="@+id/FourthLine"
+        android:layout_width="341dp"
+        android:layout_height="20dp"
+        android:layout_weight="0.22"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:layout_below="@+id/StockTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="84dp" />
+    <TextView
+        android:id="@+id/FifthLine"
+        android:layout_width="341dp"
+        android:layout_height="20dp"
+        android:layout_weight=".88"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:layout_below="@+id/StockTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="105dp" />
+    <TextView
+        android:id="@+id/SixthLine"
+        android:layout_width="341dp"
+        android:layout_height="20dp"
+        android:layout_weight=".88"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:layout_below="@+id/StockTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="126dp" />
+    <TextView
+        android:id="@+id/Seventhline"
+        android:layout_width="341dp"
+        android:layout_height="20dp"
+        android:layout_weight=".88"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:layout_below="@+id/StockTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="147dp" />
+    <TextView
+        android:id="@+id/Eightline"
+        android:layout_width="341dp"
+        android:layout_height="20dp"
+        android:layout_weight=".88"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:layout_below="@+id/StockTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="168dp" />
+    <TextView
+        android:id="@+id/Ninthline"
+        android:layout_width="341dp"
+        android:layout_height="20dp"
+        android:layout_weight=".88"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:layout_below="@+id/StockTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="189dp" />
+
+</RelativeLayout>
+

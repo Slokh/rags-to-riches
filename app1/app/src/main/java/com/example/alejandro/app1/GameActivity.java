@@ -54,7 +54,7 @@ public class GameActivity extends MainMenuActivity {
 
     ArrayAdapter<Company> displayAdapter;
     TextView turnCount;
-    TextView balanceAmount;
+//    TextView balanceAmount;
     private Button mQuitButton = null;
     private Button mPortfolioButton = null;
     private Button mNextTurnButton = null;
@@ -70,8 +70,8 @@ public class GameActivity extends MainMenuActivity {
     Account account;
     Portfolio portfolio;
     int timercount = 120;
-    int turnvalue = 1;
-    double balance = 5000;
+    int turnvalue = 10;
+    double initialbalance = 5000;
     @Override
 
 
@@ -83,11 +83,11 @@ public class GameActivity extends MainMenuActivity {
         account = new Account(extras.getInt("id"), extras.getString("email"), extras.getString("username"), extras.getString("password"));
 
         turnCount = (TextView) findViewById(R.id.turnCount);
-        turnCount.setText("Turn: " + String.valueOf(turnvalue));
+        turnCount.setText("Turn: " + String.valueOf(turnvalue-9));
 
 
-        balanceAmount = (TextView) findViewById(R.id.balanceAmount);
-        balanceAmount.setText("Your Balance: " + String.valueOf(balance));
+//        balanceAmount = (TextView) findViewById(R.id.balanceAmount);
+//        balanceAmount.setText("Your Balance: " + String.valueOf(initialbalance));
 
 
         mNextTurnButton = (Button) findViewById(R.id.editRemainingTimeTextButton);
@@ -108,6 +108,8 @@ public class GameActivity extends MainMenuActivity {
 
         ListView listView = (ListView) findViewById(R.id.companyList);
         listView.setAdapter(displayAdapter);
+//        balanceAmount.setText("Your Balance: " + portfolio.getBalance());
+        Log.d("SUP",Double.toString(portfolio.getBalance()));
         listView.setBackgroundColor(Color.WHITE);
 
 
@@ -130,16 +132,19 @@ public class GameActivity extends MainMenuActivity {
                         mNextTurnButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                turnvalue++;
-                                displayAdapter = new CompanyAdapter(GameActivity.this, context, account, portfolio, companies, turnvalue);
+
+                                for (int x = 0; x < companies.size(); x++){
+                                    (companies.get(x)).goToNextWeek();
+                                }
+                                displayAdapter = new CompanyAdapter(GameActivity.this, context, account, portfolio, companies, companies.get(0).returnWeek());
 
                                 ListView listView = (ListView) findViewById(R.id.companyList);
                                 listView.setAdapter(displayAdapter);
-                                listView.setBackgroundColor(Color.WHITE);
-
+                  //              balanceAmount.setText("Your Balance: " + portfolio.getBalance());
+                   //             Log.d("SUP",Double.toString(portfolio.getBalance()));
 
                                 mNextTurnButton.setText("waiting for other player...");
-                                turnCount.setText("Turn: " + String.valueOf(turnvalue));
+                                turnCount.setText("Turn: " + String.valueOf(companies.get(0).returnWeek()-9));
                                 runOnUiThread(new Runnable() { @Override public void run() {
 
                                     mNextTurnButton.setText("waiting for other player...");
@@ -156,7 +161,7 @@ public class GameActivity extends MainMenuActivity {
                                 // stocks should update to next week here
                                 timercount = 119;
 
-                                turnCount.setText("Turn: " + String.valueOf(turnvalue));
+                                turnCount.setText("Turn: " + String.valueOf(companies.get(0).returnWeek()-9));
 
                             }
                         });
@@ -171,15 +176,18 @@ public class GameActivity extends MainMenuActivity {
                             //
                             // stocks should update to next week
 
-                            turnvalue++;
-                            displayAdapter = new CompanyAdapter(GameActivity.this, context, account, portfolio, companies, turnvalue);
+
+                            for (int x = 0; x < companies.size(); x++){
+                                (companies.get(x)).goToNextWeek();
+                            }
+
+                            displayAdapter = new CompanyAdapter(GameActivity.this, context, account, portfolio, companies, companies.get(0).returnWeek());
 
                             ListView listView = (ListView) findViewById(R.id.companyList);
                             listView.setAdapter(displayAdapter);
-                            listView.setBackgroundColor(Color.WHITE);
-
-
-                            turnCount.setText("Turn: " + String.valueOf(turnvalue));
+                //            balanceAmount.setText("Your Balance: " + portfolio.getBalance());
+                 //           Log.d("SUP",Double.toString(portfolio.getBalance()));
+                            turnCount.setText("Turn: " + String.valueOf(companies.get(0).returnWeek()-9));
                             timercount = 120;
 
                             if (turnvalue == 25){
@@ -329,7 +337,7 @@ public class GameActivity extends MainMenuActivity {
                 prices[i] = Double.parseDouble(split[i+3]);
                 Log.d(gameName, Double.toString(prices[i]));
             }
-            companies.add(new Company(gameName, ticker, realName, prices));
+            companies.add(new Company(gameName, ticker, realName, prices, turnvalue));
         }
     }
 
@@ -363,7 +371,7 @@ public class GameActivity extends MainMenuActivity {
             inputStream.close();
             System.out.println(result);
             httpURLConnection.disconnect();
-            return new Portfolio(account.getId(), parsePortfolio(result));
+            return new Portfolio(account.getId(), parsePortfolio(result),initialbalance);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {

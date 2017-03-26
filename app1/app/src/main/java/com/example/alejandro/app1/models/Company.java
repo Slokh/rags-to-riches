@@ -5,7 +5,7 @@ package com.example.alejandro.app1.models;
  */
 
 public class Company {
-    int counter = 0;
+    int currentWeek;
     String name;
     String ticker;
     String description;
@@ -13,13 +13,14 @@ public class Company {
     double price;
     double[] priceHistory;
 
-    public Company(String name, String ticker, String realName, double[] priceHistory) {
+    public Company(String name, String ticker, String realName, double[] priceHistory, int turnvalue) {
         this.name = name;
         this.ticker = ticker;
         this.realName = realName;
         this.priceHistory = priceHistory;
         this.price = priceHistory[1];
         this.description = "";
+        this.currentWeek = turnvalue;
     }
 
     public String getName() {
@@ -27,6 +28,10 @@ public class Company {
     }
 
     public double getPrice() { return price; }
+
+    public int returnWeek() { return currentWeek;}
+
+    public void goToNextWeek() { currentWeek++; }
 
     public double getPriceAt(int i) {
         return priceHistory[i];
