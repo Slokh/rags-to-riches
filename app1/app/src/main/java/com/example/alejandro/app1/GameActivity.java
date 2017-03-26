@@ -158,6 +158,9 @@ public class GameActivity extends MainMenuActivity {
                                 }catch(InterruptedException e ){
                                     e.printStackTrace();
                                 }
+
+
+
                                 // stocks should update to next week here
                                 timercount = 119;
 
@@ -185,8 +188,6 @@ public class GameActivity extends MainMenuActivity {
 
                             ListView listView = (ListView) findViewById(R.id.companyList);
                             listView.setAdapter(displayAdapter);
-                //            balanceAmount.setText("Your Balance: " + portfolio.getBalance());
-                 //           Log.d("SUP",Double.toString(portfolio.getBalance()));
                             turnCount.setText("Turn: " + String.valueOf(companies.get(0).returnWeek()-9));
                             timercount = 120;
 
