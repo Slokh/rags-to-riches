@@ -93,85 +93,6 @@ public class GameActivity extends MainMenuActivity {
         mNextTurnButton = (Button) findViewById(R.id.editRemainingTimeTextButton);
 
 
-        Thread t = new Thread(){
-            @Override public void run(){
-            while(!isInterrupted()){
-
-                if (turnvalue == 25){
- //                       Intent i = new Intent(GameActivity.this, GameResultsActivity.class);
- //                      startActivity(i);
-
-                }
-
-
-                try {
-
-                    mNextTurnButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            turnvalue++;
-                            mNextTurnButton.setText("waiting for other player...");
-                            turnCount.setText("Turn: " + String.valueOf(turnvalue));
-                            runOnUiThread(new Runnable() { @Override public void run() {
-
-                                mNextTurnButton.setText("waiting for other player...");
-
-                            }
-                            });
-
-                            try {
-
-                                Thread.sleep(005);
-                            }catch(InterruptedException e ){
-                                e.printStackTrace();
-                            }
-                            // stocks should update to next week here
-                            timercount = 119;
-
-                            turnCount.setText("Turn: " + String.valueOf(turnvalue));
-                        }
-                    });
-
-
-                    Thread.sleep(1000);
-                    timercount--;
-
-
-                    if (timercount == 0){
-
-                        //
-                        // stocks should update to next week
-
-                        turnvalue++;
-                        turnCount.setText("Turn: " + String.valueOf(turnvalue));
-                        timercount = 120;
-
-                        if (turnvalue == 25){
- //                           Intent i = new Intent(GameActivity.this, GameResultsActivity.class);
- //                           startActivity(i);
-
-                        }
-
-                    }
-
-                    runOnUiThread(new Runnable() { @Override public void run() {
-                        mNextTurnButton.setText("Next turn: " + String.valueOf(timercount/60) + ":" + String.valueOf(timercount % 60));
-                    }
-                    });
-
-
-                }catch(InterruptedException e ){
-                    e.printStackTrace();
-
-                }
-
-            }
-
-            }
-
-        };
-
-        t.start();
 
 
 
@@ -182,12 +103,118 @@ public class GameActivity extends MainMenuActivity {
         generateCompanies();
         portfolio = grabPortfolio();
 
-        Context context = getApplicationContext();
-        displayAdapter = new CompanyAdapter(GameActivity.this, context, account, portfolio, companies);
+        final Context context = getApplicationContext();
+        displayAdapter = new CompanyAdapter(GameActivity.this, context, account, portfolio, companies, turnvalue);
 
         ListView listView = (ListView) findViewById(R.id.companyList);
         listView.setAdapter(displayAdapter);
         listView.setBackgroundColor(Color.WHITE);
+
+
+        // turn timer stuff //
+
+
+        Thread t = new Thread(){
+            @Override public void run(){
+                while(!isInterrupted()){
+
+                    if (turnvalue == 25){
+                        //                       Intent i = new Intent(GameActivity.this, GameResultsActivity.class);
+                        //                      startActivity(i);
+
+                    }
+
+
+                    try {
+
+                        mNextTurnButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                turnvalue++;
+                                displayAdapter = new CompanyAdapter(GameActivity.this, context, account, portfolio, companies, turnvalue);
+
+                                ListView listView = (ListView) findViewById(R.id.companyList);
+                                listView.setAdapter(displayAdapter);
+                                listView.setBackgroundColor(Color.WHITE);
+
+
+                                mNextTurnButton.setText("waiting for other player...");
+                                turnCount.setText("Turn: " + String.valueOf(turnvalue));
+                                runOnUiThread(new Runnable() { @Override public void run() {
+
+                                    mNextTurnButton.setText("waiting for other player...");
+
+                                }
+                                });
+
+                                try {
+
+                                    Thread.sleep(005);
+                                }catch(InterruptedException e ){
+                                    e.printStackTrace();
+                                }
+                                // stocks should update to next week here
+                                timercount = 119;
+
+                                turnCount.setText("Turn: " + String.valueOf(turnvalue));
+
+                            }
+                        });
+
+
+                        Thread.sleep(1000);
+                        timercount--;
+
+
+                        if (timercount == 0){
+
+                            //
+                            // stocks should update to next week
+
+                            turnvalue++;
+                            displayAdapter = new CompanyAdapter(GameActivity.this, context, account, portfolio, companies, turnvalue);
+
+                            ListView listView = (ListView) findViewById(R.id.companyList);
+                            listView.setAdapter(displayAdapter);
+                            listView.setBackgroundColor(Color.WHITE);
+
+
+                            turnCount.setText("Turn: " + String.valueOf(turnvalue));
+                            timercount = 120;
+
+                            if (turnvalue == 25){
+                                //                           Intent i = new Intent(GameActivity.this, GameResultsActivity.class);
+                                //                           startActivity(i);
+
+                            }
+
+                        }
+
+                        runOnUiThread(new Runnable() { @Override public void run() {
+                            mNextTurnButton.setText("Next turn: " + String.valueOf(timercount/60) + ":" + String.valueOf(timercount % 60));
+                        }
+                        });
+
+
+                    }catch(InterruptedException e ){
+                        e.printStackTrace();
+
+                    }
+
+                }
+
+            }
+
+        };
+
+        t.start();
+
+        //
+
+
+
+
+
 
         mQuitButton = (Button) findViewById(R.id.goMainMenuActivity);
         mQuitButton.setOnClickListener(new View.OnClickListener() {
@@ -300,6 +327,7 @@ public class GameActivity extends MainMenuActivity {
             double[] prices = new double[50];
             for(int i=0; i<50; i++) {
                 prices[i] = Double.parseDouble(split[i+3]);
+                Log.d(gameName, Double.toString(prices[i]));
             }
             companies.add(new Company(gameName, ticker, realName, prices));
         }

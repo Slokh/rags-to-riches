@@ -5,7 +5,7 @@ package com.example.alejandro.app1.models;
  */
 
 public class Company {
-
+    int counter = 0;
     String name;
     String ticker;
     String description;
@@ -18,7 +18,7 @@ public class Company {
         this.ticker = ticker;
         this.realName = realName;
         this.priceHistory = priceHistory;
-        this.price = priceHistory[0];
+        this.price = priceHistory[1];
         this.description = "";
     }
 

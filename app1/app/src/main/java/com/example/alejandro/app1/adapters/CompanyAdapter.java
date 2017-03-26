@@ -33,16 +33,18 @@ import static android.R.attr.port;
 
 public class CompanyAdapter extends GenericArrayAdapter<Company> implements NumberPicker.OnValueChangeListener {
 
+    int priceAt;
     private List<Company> companies;
     private Activity activity;
     private Account account;
     private Portfolio portfolio;
 
-    public CompanyAdapter(Activity activity, Context context, Account account, Portfolio portfolio, List<Company> companies) {
+    public CompanyAdapter(Activity activity, Context context, Account account, Portfolio portfolio, List<Company> companies, int priceAt) {
         super(context, companies);
         this.activity = activity;
         this.account = account;
         this.portfolio = portfolio;
+        this.priceAt = priceAt;
     }
 
     @Override
@@ -66,7 +68,7 @@ public class CompanyAdapter extends GenericArrayAdapter<Company> implements Numb
         final Company company = data.get(position);
 
         text.setText(company.getName());
-        price.setText(company.getPrice() + "");
+        price.setText(company.getPriceAt(priceAt) + "");
 
 
         buyButton.setOnClickListener(new View.OnClickListener() {
