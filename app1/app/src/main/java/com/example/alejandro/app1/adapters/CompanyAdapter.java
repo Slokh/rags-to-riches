@@ -122,7 +122,7 @@ public class CompanyAdapter extends GenericArrayAdapter<Company> implements Numb
                         AlertDialog alertDialog = new AlertDialog.Builder(activity).create();
                         alertDialog.setTitle("Success!");
                         portfolio.updateBalance(company.getPrice(),np.getValue(),true);
-                        alertDialog.setMessage("Bought " + String.valueOf(np.getValue()) + " stocks!");
+                        alertDialog.setMessage("Bought " + String.valueOf(np.getValue()) + " stocks!\nBalance Updated: " + portfolio.getBalanceText());
                         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialogSuccess, int which) {
