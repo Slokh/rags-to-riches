@@ -35,11 +35,16 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import com.example.alejandro.app1.models.Account;
 import com.example.alejandro.app1.models.Portfolio;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
+
 import android.widget.TextView;
 
 import static android.R.attr.data;
@@ -47,6 +52,7 @@ import static android.R.id.list;
 import static android.R.id.message;
 import static android.media.CamcorderProfile.get;
 import static com.example.alejandro.app1.R.drawable.company;
+import static com.example.alejandro.app1.R.id.price;
 import static com.example.alejandro.app1.R.id.relativeLayout;
 import static java.sql.Types.NULL;
 import android.view.View;
@@ -103,7 +109,7 @@ public class GameActivity extends MainMenuActivity {
 
 
         balanceAmount = (TextView) findViewById(R.id.balanceAmount);
-        balanceAmount.setText("Balance: $" + String.valueOf(portfolio.getBalance()));
+        balanceAmount.setText("Balance: " + portfolio.getBalanceText());
 
         final Context context = getApplicationContext();
         displayAdapter = new CompanyAdapter(GameActivity.this, context, account, portfolio, companies, turnvalue);
@@ -118,41 +124,37 @@ public class GameActivity extends MainMenuActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                    Company company = companies.get((int) id);
-                        final Dialog infoDidalog = new Dialog(GameActivity.this);
-                        infoDidalog.setTitle("Stock Info");
-                        infoDidalog.setContentView(R.layout.stock_info);
-                        infoDidalog.show();
+                Company company = companies.get((int) id);
+                final Dialog infoDidalog = new Dialog(GameActivity.this);
+                infoDidalog.setTitle("Stock Info");
+                infoDidalog.setContentView(R.layout.stock_info);
+                infoDidalog.show();
+                GraphView graph = (GraphView) infoDidalog.findViewById(R.id.graph);
+                LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
+                        new DataPoint(1, company.getPriceAt(company.returnWeek()-9)),
+                        new DataPoint(2, company.getPriceAt(company.returnWeek()-8)),
+                        new DataPoint(3, company.getPriceAt(company.returnWeek()-7)),
+                        new DataPoint(4, company.getPriceAt(company.returnWeek()-6)),
+                        new DataPoint(5, company.getPriceAt(company.returnWeek()-5)),
+                        new DataPoint(6, company.getPriceAt(company.returnWeek()-4)),
+                        new DataPoint(7, company.getPriceAt(company.returnWeek()-3)),
+                        new DataPoint(8, company.getPriceAt(company.returnWeek()-2)),
+                        new DataPoint(9, company.getPriceAt(company.returnWeek()-1)),
+                });
 
-                        TextView stockinfo = (TextView) infoDidalog.findViewById(R.id.stockinfoFirstLine);
+                graph.setTitle(company.getName() + " Trends");
+                graph.addSeries(series);
+                graph.getViewport().setMinX(1);
+                graph.getViewport().setScalable(true);
+                graph.getViewport().setScrollable(true);
+                graph.getViewport().setScalableY(true);
+                graph.getViewport().setScrollableY(true);
+                graph.getGridLabelRenderer().setNumHorizontalLabels(9);
+                graph.getViewport().setXAxisBoundsManual(true);
+                graph.getViewport().setMinX(1);
+                graph.getViewport().setMaxX(9);
 
-                        TextView stockinfo2 = (TextView) infoDidalog.findViewById(R.id.secondLine);
-
-                        TextView stockinfo3 = (TextView) infoDidalog.findViewById(R.id.ThirdLine);
-
-                        TextView stockinfo4 = (TextView) infoDidalog.findViewById(R.id.FourthLine);
-
-                        TextView stockinfo5 = (TextView) infoDidalog.findViewById(R.id.FifthLine);
-
-                        TextView stockInfo6 = (TextView) infoDidalog.findViewById(R.id.SixthLine);
-
-                        TextView stockInfo7 = (TextView) infoDidalog.findViewById(R.id.Seventhline);
-                        TextView stockInfo8 = (TextView) infoDidalog.findViewById(R.id.Eightline);
-                        TextView stockInfo9 = (TextView) infoDidalog.findViewById(R.id.Ninthline);
-
-
-                        stockinfo.setText("Previous weeks stock info:" + "\t" + company.getName());
-                        stockinfo2.setText("   "+ company.getPriceAt(company.returnWeek()-1));
-                        stockinfo3.setText("   "+ company.getPriceAt(company.returnWeek()-2));
-                        stockinfo4.setText("   "+ company.getPriceAt(company.returnWeek()-3));
-                        stockinfo5.setText("   "+ company.getPriceAt(company.returnWeek()-4));
-                        stockInfo6.setText("   "+ company.getPriceAt(company.returnWeek()-5));
-                        stockInfo7.setText("   "+ company.getPriceAt(company.returnWeek()-6));
-                        stockInfo8.setText("   "+ company.getPriceAt(company.returnWeek()-7));
-                        stockInfo9.setText("   "+ company.getPriceAt(company.returnWeek()-8));
-
-
-                    }
+            }
         });
 
         //
@@ -213,9 +215,10 @@ public class GameActivity extends MainMenuActivity {
 
                 //
                 //
-                //
+                NumberFormat formatter = NumberFormat.getCurrencyInstance();
 
-                String message = "You: " + String.valueOf(5000) + "\nPlayer 2: "+ Standingsarray[0] + " \nPlayer 3: " + Standingsarray[1] + "\nPlayer 4: " + Standingsarray[2] +"\n";
+
+                String message = "You: " + formatter.format(portfolio.getBalance()) + "\nPlayer 2: "+ formatter.format(Standingsarray[0]) + " \nPlayer 3: " + formatter.format(Standingsarray[1]) + "\nPlayer 4: " + formatter.format(Standingsarray[2]) +"\n";
 
 
                 alertDialog.setMessage(message);
@@ -259,11 +262,11 @@ public class GameActivity extends MainMenuActivity {
                                 //              balanceAmount.setText("Your Balance: " + portfolio.getBalance());
                                 //             Log.d("SUP",Double.toString(portfolio.getBalance()));
 
-                                mNextTurnButton.setText("waiting for other player...");
+                                mNextTurnButton.setText("Waiting for other player...");
                                 turnCount.setText("Turn: " + String.valueOf(companies.get(0).returnWeek()-9));
                                 runOnUiThread(new Runnable() { @Override public void run() {
 
-                                    mNextTurnButton.setText("waiting for other player...");
+                                    mNextTurnButton.setText("Waiting for other player...");
 
                                 }
                                 });
@@ -278,7 +281,7 @@ public class GameActivity extends MainMenuActivity {
 
 
                                 // stocks should update to next week here
-                                timercount = 119;
+                                timercount = 29;
 
                                 turnCount.setText("Turn: " + String.valueOf(companies.get(0).returnWeek()-9));
 
@@ -301,6 +304,10 @@ public class GameActivity extends MainMenuActivity {
                                 for (int x = 0; x < companies.size(); x++){
                                     (companies.get(x)).goToNextWeek();
                                 }
+                                displayAdapter = new CompanyAdapter(GameActivity.this, context, account, portfolio, companies, companies.get(0).returnWeek());
+
+                                ListView listView = (ListView) findViewById(R.id.companyList);
+                                listView.setAdapter(displayAdapter);
 
                                 turnvalue++;
                                 turnCount.setText("Turn: " + String.valueOf(turnvalue-9));
@@ -314,7 +321,7 @@ public class GameActivity extends MainMenuActivity {
 
                             }
                             mNextTurnButton.setText("Next turn: " + String.valueOf(timercount/60) + ":" + (timercount % 60 < 10 ? "0" : "") + String.valueOf(timercount % 60));
-                            balanceAmount.setText("Balance: $" + String.valueOf(portfolio.getBalance()));
+                            balanceAmount.setText("Balance: " + portfolio.getBalanceText());
                         }
                         });
 
@@ -412,7 +419,6 @@ public class GameActivity extends MainMenuActivity {
             }
             bufferedReader.close();
             inputStream.close();
-            System.out.println(result);
             httpURLConnection.disconnect();
             return new Portfolio(account.getId(), parsePortfolio(result), Double.parseDouble(result.split("/")[0]));
         } catch (MalformedURLException e) {

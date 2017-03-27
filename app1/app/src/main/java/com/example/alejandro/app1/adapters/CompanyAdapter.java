@@ -21,6 +21,9 @@ import com.example.alejandro.app1.R;
 import com.example.alejandro.app1.models.Company;
 import com.example.alejandro.app1.models.Account;
 import com.example.alejandro.app1.models.Portfolio;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.util.List;
 
@@ -71,7 +74,7 @@ public class CompanyAdapter extends GenericArrayAdapter<Company> implements Numb
         final Company company = data.get(position);
 
         text.setText(company.getName());
-        price.setText(company.getPriceAt(priceAt) + "");
+        price.setText(company.getPriceText());
 
 
 
@@ -210,33 +213,30 @@ public class CompanyAdapter extends GenericArrayAdapter<Company> implements Numb
         infoDidalog.setTitle("Stock Info");
         infoDidalog.setContentView(R.layout.stock_info);
         infoDidalog.show();
+        GraphView graph = (GraphView) infoDidalog.findViewById(R.id.graph);
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
+                new DataPoint(1, company.getPriceAt(company.returnWeek()-9)),
+                new DataPoint(2, company.getPriceAt(company.returnWeek()-8)),
+                new DataPoint(3, company.getPriceAt(company.returnWeek()-7)),
+                new DataPoint(4, company.getPriceAt(company.returnWeek()-6)),
+                new DataPoint(5, company.getPriceAt(company.returnWeek()-5)),
+                new DataPoint(6, company.getPriceAt(company.returnWeek()-4)),
+                new DataPoint(7, company.getPriceAt(company.returnWeek()-3)),
+                new DataPoint(8, company.getPriceAt(company.returnWeek()-2)),
+                new DataPoint(9, company.getPriceAt(company.returnWeek()-1)),
+        });
 
-        TextView stockinfo = (TextView) infoDidalog.findViewById(R.id.stockinfoFirstLine);
-
-        TextView stockinfo2 = (TextView) infoDidalog.findViewById(R.id.secondLine);
-
-        TextView stockinfo3 = (TextView) infoDidalog.findViewById(R.id.ThirdLine);
-
-        TextView stockinfo4 = (TextView) infoDidalog.findViewById(R.id.FourthLine);
-
-        TextView stockinfo5 = (TextView) infoDidalog.findViewById(R.id.FifthLine);
-
-        TextView stockInfo6 = (TextView) infoDidalog.findViewById(R.id.SixthLine);
-
-        TextView stockInfo7 = (TextView) infoDidalog.findViewById(R.id.Seventhline);
-        TextView stockInfo8 = (TextView) infoDidalog.findViewById(R.id.Eightline);
-        TextView stockInfo9 = (TextView) infoDidalog.findViewById(R.id.Ninthline);
-
-
-        stockinfo.setText("Previous weeks stock info:" + "\t" + company.getName());
-        stockinfo2.setText("   "+ company.getPriceAt(company.returnWeek()-1));
-        stockinfo3.setText("   "+ company.getPriceAt(company.returnWeek()-2));
-        stockinfo4.setText("   "+ company.getPriceAt(company.returnWeek()-3));
-        stockinfo5.setText("   "+ company.getPriceAt(company.returnWeek()-4));
-        stockInfo6.setText("   "+ company.getPriceAt(company.returnWeek()-5));
-        stockInfo7.setText("   "+ company.getPriceAt(company.returnWeek()-6));
-        stockInfo8.setText("   "+ company.getPriceAt(company.returnWeek()-7));
-        stockInfo9.setText("   "+ company.getPriceAt(company.returnWeek()-8));
+        graph.setTitle(company.getName() + " Trends");
+        graph.addSeries(series);
+        graph.getViewport().setMinX(1);
+        graph.getViewport().setScalable(true);
+        graph.getViewport().setScrollable(true);
+        graph.getViewport().setScalableY(true);
+        graph.getViewport().setScrollableY(true);
+        graph.getGridLabelRenderer().setNumHorizontalLabels(9);
+        graph.getViewport().setXAxisBoundsManual(true);
+        graph.getViewport().setMinX(1);
+        graph.getViewport().setMaxX(9);
     }
 
 

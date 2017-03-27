@@ -1,5 +1,7 @@
 package com.example.alejandro.app1.models;
 
+import java.text.NumberFormat;
+
 /**
  * Created by Kartik on 3/17/2017.
  */
@@ -18,7 +20,7 @@ public class Company {
         this.ticker = ticker;
         this.realName = realName;
         this.priceHistory = priceHistory;
-        this.price = priceHistory[1];
+        this.price = priceHistory[turnvalue];
         this.description = "";
         this.currentWeek = turnvalue;
     }
@@ -29,9 +31,14 @@ public class Company {
 
     public double getPrice() { return price; }
 
+    public String getPriceText(){
+        NumberFormat formatter = NumberFormat.getCurrencyInstance();
+        return formatter.format(price);
+    }
+
     public int returnWeek() { return currentWeek;}
 
-    public void goToNextWeek() { currentWeek++; }
+    public void goToNextWeek() { currentWeek++; price = priceHistory[currentWeek]; }
 
     public double getPriceAt(int i) {
         return priceHistory[i];
