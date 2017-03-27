@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -40,7 +41,12 @@ import java.util.List;
 import com.example.alejandro.app1.models.Account;
 import com.example.alejandro.app1.models.Portfolio;
 import android.widget.TextView;
+
+import static android.R.attr.data;
+import static android.R.id.list;
 import static android.R.id.message;
+import static android.media.CamcorderProfile.get;
+import static com.example.alejandro.app1.R.drawable.company;
 import static com.example.alejandro.app1.R.id.relativeLayout;
 import static java.sql.Types.NULL;
 import android.view.View;
@@ -54,7 +60,7 @@ public class GameActivity extends MainMenuActivity {
 
     ArrayAdapter<Company> displayAdapter;
     TextView turnCount;
-//    TextView balanceAmount;
+    TextView balanceAmount;
     private Button mQuitButton = null;
     private Button mPortfolioButton = null;
     private Button mNextTurnButton = null;
@@ -69,7 +75,7 @@ public class GameActivity extends MainMenuActivity {
     double[] prices;
     Account account;
     Portfolio portfolio;
-    int timercount = 120;
+    int timercount = 30;
     int turnvalue = 10;
     double initialbalance = 5000;
     @Override
@@ -86,15 +92,7 @@ public class GameActivity extends MainMenuActivity {
         turnCount.setText("Turn: " + String.valueOf(turnvalue-9));
 
 
-//        balanceAmount = (TextView) findViewById(R.id.balanceAmount);
-//        balanceAmount.setText("Your Balance: " + String.valueOf(initialbalance));
-
-
         mNextTurnButton = (Button) findViewById(R.id.editRemainingTimeTextButton);
-
-
-
-
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -102,6 +100,10 @@ public class GameActivity extends MainMenuActivity {
         companies = new ArrayList<Company>();
         generateCompanies();
         portfolio = grabPortfolio();
+
+
+        balanceAmount = (TextView) findViewById(R.id.balanceAmount);
+        balanceAmount.setText("Balance: $" + String.valueOf(portfolio.getBalance()));
 
         final Context context = getApplicationContext();
         displayAdapter = new CompanyAdapter(GameActivity.this, context, account, portfolio, companies, turnvalue);
@@ -112,111 +114,46 @@ public class GameActivity extends MainMenuActivity {
         Log.d("SUP",Double.toString(portfolio.getBalance()));
         listView.setBackgroundColor(Color.WHITE);
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        // turn timer stuff //
+                    Company company = companies.get((int) id);
+                        final Dialog infoDidalog = new Dialog(GameActivity.this);
+                        infoDidalog.setTitle("Stock Info");
+                        infoDidalog.setContentView(R.layout.stock_info);
+                        infoDidalog.show();
+
+                        TextView stockinfo = (TextView) infoDidalog.findViewById(R.id.stockinfoFirstLine);
+
+                        TextView stockinfo2 = (TextView) infoDidalog.findViewById(R.id.secondLine);
+
+                        TextView stockinfo3 = (TextView) infoDidalog.findViewById(R.id.ThirdLine);
+
+                        TextView stockinfo4 = (TextView) infoDidalog.findViewById(R.id.FourthLine);
+
+                        TextView stockinfo5 = (TextView) infoDidalog.findViewById(R.id.FifthLine);
+
+                        TextView stockInfo6 = (TextView) infoDidalog.findViewById(R.id.SixthLine);
+
+                        TextView stockInfo7 = (TextView) infoDidalog.findViewById(R.id.Seventhline);
+                        TextView stockInfo8 = (TextView) infoDidalog.findViewById(R.id.Eightline);
+                        TextView stockInfo9 = (TextView) infoDidalog.findViewById(R.id.Ninthline);
 
 
-        Thread t = new Thread(){
-            @Override public void run(){
-                while(!isInterrupted()){
+                        stockinfo.setText("Previous weeks stock info:" + "\t" + company.getName());
+                        stockinfo2.setText("   "+ company.getPriceAt(company.returnWeek()-1));
+                        stockinfo3.setText("   "+ company.getPriceAt(company.returnWeek()-2));
+                        stockinfo4.setText("   "+ company.getPriceAt(company.returnWeek()-3));
+                        stockinfo5.setText("   "+ company.getPriceAt(company.returnWeek()-4));
+                        stockInfo6.setText("   "+ company.getPriceAt(company.returnWeek()-5));
+                        stockInfo7.setText("   "+ company.getPriceAt(company.returnWeek()-6));
+                        stockInfo8.setText("   "+ company.getPriceAt(company.returnWeek()-7));
+                        stockInfo9.setText("   "+ company.getPriceAt(company.returnWeek()-8));
 
-                    if (turnvalue == 25){
-                        //                       Intent i = new Intent(GameActivity.this, GameResultsActivity.class);
-                        //                      startActivity(i);
 
                     }
-
-
-                    try {
-
-                        mNextTurnButton.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-
-                                for (int x = 0; x < companies.size(); x++){
-                                    (companies.get(x)).goToNextWeek();
-                                }
-                                displayAdapter = new CompanyAdapter(GameActivity.this, context, account, portfolio, companies, companies.get(0).returnWeek());
-
-                                ListView listView = (ListView) findViewById(R.id.companyList);
-                                listView.setAdapter(displayAdapter);
-                  //              balanceAmount.setText("Your Balance: " + portfolio.getBalance());
-                   //             Log.d("SUP",Double.toString(portfolio.getBalance()));
-
-                                mNextTurnButton.setText("waiting for other player...");
-                                turnCount.setText("Turn: " + String.valueOf(companies.get(0).returnWeek()-9));
-                                runOnUiThread(new Runnable() { @Override public void run() {
-
-                                    mNextTurnButton.setText("waiting for other player...");
-
-                                }
-                                });
-
-                                try {
-
-                                    Thread.sleep(005);
-                                }catch(InterruptedException e ){
-                                    e.printStackTrace();
-                                }
-
-
-
-                                // stocks should update to next week here
-                                timercount = 119;
-
-                                turnCount.setText("Turn: " + String.valueOf(companies.get(0).returnWeek()-9));
-
-                            }
-                        });
-
-
-                        Thread.sleep(1000);
-                        timercount--;
-
-
-                        if (timercount == 0){
-
-                            //
-                            // stocks should update to next week
-
-
-                            for (int x = 0; x < companies.size(); x++){
-                                (companies.get(x)).goToNextWeek();
-                            }
-
-                            displayAdapter = new CompanyAdapter(GameActivity.this, context, account, portfolio, companies, companies.get(0).returnWeek());
-
-                            ListView listView = (ListView) findViewById(R.id.companyList);
-                            listView.setAdapter(displayAdapter);
-                            turnCount.setText("Turn: " + String.valueOf(companies.get(0).returnWeek()-9));
-                            timercount = 120;
-
-                            if (turnvalue == 25){
-                                //                           Intent i = new Intent(GameActivity.this, GameResultsActivity.class);
-                                //                           startActivity(i);
-
-                            }
-
-                        }
-
-                        runOnUiThread(new Runnable() { @Override public void run() {
-                            mNextTurnButton.setText("Next turn: " + String.valueOf(timercount/60) + ":" + String.valueOf(timercount % 60));
-                        }
-                        });
-
-
-                    }catch(InterruptedException e ){
-                        e.printStackTrace();
-
-                    }
-
-                }
-
-            }
-
-        };
-
-        t.start();
+        });
 
         //
 
@@ -290,7 +227,112 @@ public class GameActivity extends MainMenuActivity {
                         });
                 alertDialog.show();
             }
-        });}
+        });
+
+        // turn timer stuff //
+
+
+        Thread t = new Thread(){
+            @Override public void run(){
+                while(!isInterrupted()){
+
+                    if (turnvalue == 25){
+                        //                       Intent i = new Intent(GameActivity.this, GameResultsActivity.class);
+                        //                      startActivity(i);
+
+                    }
+
+
+                    try {
+
+                        mNextTurnButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                                for (int x = 0; x < companies.size(); x++){
+                                    (companies.get(x)).goToNextWeek();
+                                }
+                                displayAdapter = new CompanyAdapter(GameActivity.this, context, account, portfolio, companies, companies.get(0).returnWeek());
+
+                                ListView listView = (ListView) findViewById(R.id.companyList);
+                                listView.setAdapter(displayAdapter);
+                                //              balanceAmount.setText("Your Balance: " + portfolio.getBalance());
+                                //             Log.d("SUP",Double.toString(portfolio.getBalance()));
+
+                                mNextTurnButton.setText("waiting for other player...");
+                                turnCount.setText("Turn: " + String.valueOf(companies.get(0).returnWeek()-9));
+                                runOnUiThread(new Runnable() { @Override public void run() {
+
+                                    mNextTurnButton.setText("waiting for other player...");
+
+                                }
+                                });
+
+                                try {
+
+                                    Thread.sleep(005);
+                                }catch(InterruptedException e ){
+                                    e.printStackTrace();
+                                }
+
+
+
+                                // stocks should update to next week here
+                                timercount = 119;
+
+                                turnCount.setText("Turn: " + String.valueOf(companies.get(0).returnWeek()-9));
+
+                            }
+                        });
+
+
+                        Thread.sleep(1000);
+                        timercount--;
+
+
+
+                        runOnUiThread(new Runnable() { @Override public void run() {
+                            if (timercount == 0){
+
+                                //
+                                // stocks should update to next week
+
+
+                                for (int x = 0; x < companies.size(); x++){
+                                    (companies.get(x)).goToNextWeek();
+                                }
+
+                                turnvalue++;
+                                turnCount.setText("Turn: " + String.valueOf(turnvalue-9));
+                                timercount = 30;
+
+                                if (turnvalue == 25){
+                                    //                           Intent i = new Intent(GameActivity.this, GameResultsActivity.class);
+                                    //                           startActivity(i);
+
+                                }
+
+                            }
+                            mNextTurnButton.setText("Next turn: " + String.valueOf(timercount/60) + ":" + (timercount % 60 < 10 ? "0" : "") + String.valueOf(timercount % 60));
+                            balanceAmount.setText("Balance: $" + String.valueOf(portfolio.getBalance()));
+                        }
+                        });
+
+
+                    }catch(InterruptedException e ){
+                        e.printStackTrace();
+
+                    }
+
+                }
+
+            }
+
+        };
+
+        t.start();
+
+    }
 
 
 
@@ -372,7 +414,7 @@ public class GameActivity extends MainMenuActivity {
             inputStream.close();
             System.out.println(result);
             httpURLConnection.disconnect();
-            return new Portfolio(account.getId(), parsePortfolio(result),initialbalance);
+            return new Portfolio(account.getId(), parsePortfolio(result), Double.parseDouble(result.split("/")[0]));
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -384,8 +426,8 @@ public class GameActivity extends MainMenuActivity {
     public HashMap<Company, Integer> parsePortfolio(String result) {
         HashMap<Company, Integer> map = new HashMap<Company, Integer>();
         String[] split = result.split("/");
-        for(String pair : split) {
-            map.put(getCompany(pair.split(",")[0]), Integer.parseInt(pair.split(",")[1]));
+        for(int i=1; i<split.length; i++) {
+            map.put(getCompany(split[i].split(",")[0]), Integer.parseInt(split[i].split(",")[1]));
         }
         return map;
     }

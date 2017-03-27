@@ -62,7 +62,6 @@ public class CompanyAdapter extends GenericArrayAdapter<Company> implements Numb
         TextView text = (TextView) vi.findViewById(R.id.companyText);
         TextView price = (TextView) vi.findViewById(R.id.companyPrice);
         Button buyButton = (Button) vi.findViewById(R.id.companyBuyButton);
-        Button infoButton = (Button) vi.findViewById(R.id.companyInfoButton);
         Button sellButton = (Button) vi.findViewById(R.id.companySellButton);
         ImageView imageView = (ImageView) vi.findViewById(R.id.companyImage);
         final TextView balanceAmount = (TextView) vi.findViewById(R.id.balanceAmount);
@@ -76,47 +75,24 @@ public class CompanyAdapter extends GenericArrayAdapter<Company> implements Numb
 
 
 
-infoButton.setOnClickListener(new View.OnClickListener(){
-    @Override
-    public void onClick(View view){
-
-        final Dialog infoDidalog = new Dialog(activity);
-        infoDidalog.setTitle("Stock Info");
-        infoDidalog.setContentView(R.layout.stock_info);
-        infoDidalog.show();
-
-        TextView stockinfo = (TextView) infoDidalog.findViewById(R.id.stockinfoFirstLine);
-
-        TextView stockinfo2 = (TextView) infoDidalog.findViewById(R.id.secondLine);
-
-        TextView stockinfo3 = (TextView) infoDidalog.findViewById(R.id.ThirdLine);
-
-        TextView stockinfo4 = (TextView) infoDidalog.findViewById(R.id.FourthLine);
-
-        TextView stockinfo5 = (TextView) infoDidalog.findViewById(R.id.FifthLine);
-
-        TextView stockInfo6 = (TextView) infoDidalog.findViewById(R.id.SixthLine);
-
-        TextView stockInfo7 = (TextView) infoDidalog.findViewById(R.id.Seventhline);
-        TextView stockInfo8 = (TextView) infoDidalog.findViewById(R.id.Eightline);
-        TextView stockInfo9 = (TextView) infoDidalog.findViewById(R.id.Ninthline);
-
-
-        stockinfo.setText("Previous weeks stock info:" + "\t" + company.getName());
-        stockinfo2.setText("   "+ company.getPriceAt(company.returnWeek()-1));
-        stockinfo3.setText("   "+ company.getPriceAt(company.returnWeek()-2));
-        stockinfo4.setText("   "+ company.getPriceAt(company.returnWeek()-3));
-        stockinfo5.setText("   "+ company.getPriceAt(company.returnWeek()-4));
-        stockInfo6.setText("   "+ company.getPriceAt(company.returnWeek()-5));
-        stockInfo7.setText("   "+ company.getPriceAt(company.returnWeek()-6));
-        stockInfo8.setText("   "+ company.getPriceAt(company.returnWeek()-7));
-        stockInfo9.setText("   "+ company.getPriceAt(company.returnWeek()-8));
-
-
-    }
-
-
-});
+        text.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                companyHistory(company);
+            }
+        });
+        price.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                companyHistory(company);
+            }
+        });
+        imageView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                companyHistory(company);
+            }
+        });
 
 
 
@@ -142,8 +118,7 @@ infoButton.setOnClickListener(new View.OnClickListener(){
                         portfolio.updateStock(company,portfolio.getAmountOfStock(company)+np.getValue());
                         AlertDialog alertDialog = new AlertDialog.Builder(activity).create();
                         alertDialog.setTitle("Success!");
-            //            portfolio.updateBalance(portfolio.getAmountOfStock(company),np.getValue(),true);
-            //            balanceAmount.setText("Your Balance: " + portfolio.getBalance());
+                        portfolio.updateBalance(company.getPrice(),np.getValue(),true);
                         alertDialog.setMessage("Bought " + String.valueOf(np.getValue()) + " stocks!");
                         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                                 new DialogInterface.OnClickListener() {
@@ -193,8 +168,7 @@ infoButton.setOnClickListener(new View.OnClickListener(){
                             AlertDialog alertDialog = new AlertDialog.Builder(activity).create();
                             alertDialog.setTitle("Success!");
                             alertDialog.setMessage("Sold " + String.valueOf(np.getValue()) + " stocks!");
-        //                    balanceAmount.setText("Your Balance: " + portfolio.getBalance());
-                            portfolio.updateBalance(portfolio.getAmountOfStock(company),np.getValue(),false);
+                            portfolio.updateBalance(company.getPrice(),np.getValue(),false);
                             alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                                     new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialogSuccess, int which) {
@@ -231,6 +205,39 @@ infoButton.setOnClickListener(new View.OnClickListener(){
     }
 
 
+    public void companyHistory(Company company) {
+        final Dialog infoDidalog = new Dialog(activity);
+        infoDidalog.setTitle("Stock Info");
+        infoDidalog.setContentView(R.layout.stock_info);
+        infoDidalog.show();
+
+        TextView stockinfo = (TextView) infoDidalog.findViewById(R.id.stockinfoFirstLine);
+
+        TextView stockinfo2 = (TextView) infoDidalog.findViewById(R.id.secondLine);
+
+        TextView stockinfo3 = (TextView) infoDidalog.findViewById(R.id.ThirdLine);
+
+        TextView stockinfo4 = (TextView) infoDidalog.findViewById(R.id.FourthLine);
+
+        TextView stockinfo5 = (TextView) infoDidalog.findViewById(R.id.FifthLine);
+
+        TextView stockInfo6 = (TextView) infoDidalog.findViewById(R.id.SixthLine);
+
+        TextView stockInfo7 = (TextView) infoDidalog.findViewById(R.id.Seventhline);
+        TextView stockInfo8 = (TextView) infoDidalog.findViewById(R.id.Eightline);
+        TextView stockInfo9 = (TextView) infoDidalog.findViewById(R.id.Ninthline);
+
+
+        stockinfo.setText("Previous weeks stock info:" + "\t" + company.getName());
+        stockinfo2.setText("   "+ company.getPriceAt(company.returnWeek()-1));
+        stockinfo3.setText("   "+ company.getPriceAt(company.returnWeek()-2));
+        stockinfo4.setText("   "+ company.getPriceAt(company.returnWeek()-3));
+        stockinfo5.setText("   "+ company.getPriceAt(company.returnWeek()-4));
+        stockInfo6.setText("   "+ company.getPriceAt(company.returnWeek()-5));
+        stockInfo7.setText("   "+ company.getPriceAt(company.returnWeek()-6));
+        stockInfo8.setText("   "+ company.getPriceAt(company.returnWeek()-7));
+        stockInfo9.setText("   "+ company.getPriceAt(company.returnWeek()-8));
+    }
 
 
 
