@@ -13,7 +13,7 @@
 
 
     <TextView
-        android:text="Create Account"
+        android:text="Register Account"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textView2"
@@ -42,8 +42,22 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="Email Address"
+                    android:id="@+id/email"
+                    tools:text="Email"
+                    android:inputType="text" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:hint="User ID"
-                    tools:text="Usrname"
+                    android:id="@+id/username"
+                    tools:text="Username"
                     android:inputType="text" />
             </android.support.design.widget.TextInputLayout>
 
@@ -58,9 +72,22 @@
                     tools:text="Password"
                     android:inputType="textPassword"
                     android:hint="Confirm Password" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/confirmpassword"
+                    tools:text="Password"
+                    android:inputType="textPassword"
+                    android:hint="Confirm Password" />
 
                 <Button
-                    android:text="Create "
+                    android:text="Register "
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

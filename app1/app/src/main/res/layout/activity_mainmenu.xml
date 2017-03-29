@@ -23,16 +23,6 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
-        <TextClock
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textClock"
-            android:textSize="18sp"
-            android:background="@color/colorPrimaryDark"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
         <ImageButton
             android:layout_width="match_parent"
             android:layout_height="165dp"
@@ -56,9 +46,10 @@
             android:scaleType="centerInside"
             android:background="@color/colorPrimaryDark"
             android:elevation="0dp"
-            android:layout_below="@+id/textClock"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_above="@+id/goGameModeActivity"
+            android:layout_alignParentTop="true" />
 
         <TextView
             android:text="Settings"
@@ -67,7 +58,6 @@
             android:id="@+id/textView7"
             android:textAlignment="center"
             android:textColor="@android:color/background_dark"
-<<<<<<< HEAD
             android:layout_marginBottom="65dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
@@ -75,23 +65,6 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:textSize="16sp" />
-=======
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="67dp" />
-
-        <TextView
-            android:text="User Porfolio "
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView4"
-            android:textColor="@android:color/background_dark"
-            android:textAlignment="center"
-            android:textSize="12sp"
-            android:layout_above="@+id/goGameAcitivy"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="64dp" />
->>>>>>> refs/remotes/origin/master
 
         <TextView
             android:layout_height="wrap_content"
@@ -104,29 +77,22 @@
             android:layout_width="match_parent"
             android:textAlignment="center"
             android:textSize="12sp"
-<<<<<<< HEAD
             android:layout_marginBottom="71dp"
             android:layout_above="@+id/goSettingsActivity"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
         <TextView
-            android:text="User Porfolio "
+            android:text="Achievements "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textView4"
             android:textColor="@android:color/background_dark"
             android:textAlignment="center"
             android:textSize="12sp"
-            android:layout_marginBottom="63dp"
+            android:layout_marginBottom="77dp"
             android:layout_above="@+id/goGameModeActivity"
             android:layout_centerHorizontal="true" />
-=======
-            android:layout_above="@+id/goSettingsActivity"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="67dp" />
->>>>>>> refs/remotes/origin/master
 
     </RelativeLayout>
 

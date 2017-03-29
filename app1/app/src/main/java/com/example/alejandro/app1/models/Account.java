@@ -6,14 +6,23 @@ package com.example.alejandro.app1.models;
 
 public class Account {
 
+    int id;
     String email;
+    String username;
     String password;
-    String userName;
 
-    public Account(String email, String password) {
+    public Account(int id, String email, String username, String password) {
+        this.id = id;
+        this.username = username;
         this.email = email;
         this.password = password;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getUsername() { return username; }
 
     public String getEmail() {
         return email;
@@ -23,7 +32,4 @@ public class Account {
         return password;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 }

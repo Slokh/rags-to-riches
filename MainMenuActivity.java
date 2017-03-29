@@ -22,6 +22,7 @@ public class MainMenuActivity extends RegisterActivity {
 
     private ImageButton mSetting = null;
     private ImageButton mGameMode = null;
+    private ImageButton mAchievements = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +56,16 @@ public class MainMenuActivity extends RegisterActivity {
 
         });
 
+        mAchievements = (ImageButton) findViewById(R.id.AccountInformation);
+        mAchievements.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent ach = new Intent(view.getContext(), AchievementsActivity.class);
+                startActivity(ach);
+                // attemptLogin();
+            }
+
+        });
     }
 
 
