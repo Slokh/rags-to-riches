@@ -11,12 +11,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+/**
+ * GameResultsActivity class handles all functions in regards to the end game scenario
+ */
 public class GameResultsActivity extends AppCompatActivity {
 
 
     private Button mQuitButton = null;
     EditText standings;
 
+    /**
+     * General initializer of Android Activity
+     * @param savedInstanceState    saved Instance of previous activity
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -51,6 +51,9 @@ import static android.Manifest.permission.READ_CONTACTS;
 import static com.example.alejandro.app1.R.id.username;
 import com.example.alejandro.app1.models.Account;
 
+/**
+ * LoginActivity class handles all functions in regards to logging a user into our system
+ */
 public class LoginActivity extends AppCompatActivity {
 
     private static final int REQUEST_READ_CONTACTS = 0;
@@ -67,6 +70,11 @@ public class LoginActivity extends AppCompatActivity {
     private Button mRegisterButton = null;
     private Button mLoginButton = null;
 
+
+    /**
+     * General initializer of Android Activity
+     * @param savedInstanceState    saved Instance of previous activity
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,9 +116,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     /**
-     * Attempts to sign in or register the account specified by the login form.
-     * If there are form errors (invalid email, missing fields, etc.), the
-     * errors are presented and no actual login attempt is made.
+     * Validates the user's information based on our account constraints
+     * @return whether the user entered the correct information to login
      */
     private boolean attemptLogin() {
         // Reset errors.
@@ -152,6 +159,10 @@ public class LoginActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Validates the user's account with our current database of users
+     * @return whether the account was found in our database and the passwords match
+     */
     private Account validateLogin() {
         // Reset errors.
         mEmailView.setError(null);
@@ -209,10 +220,19 @@ public class LoginActivity extends AppCompatActivity {
         return null;
     }
 
+    /**
+     * Checks if the user actually entered an email
+     * @param email the user's entered email
+     * @return  true if valid
+     */
     private boolean isEmailValid(String email) {
         return email.contains("@");
     }
-
+    /**
+     * Checks if the user entered a long enough password
+     * @param password  the user's entered password
+     * @return  true if valid
+     */
     private boolean isPasswordValid(String password) {
         return password.length() > 4;
     }

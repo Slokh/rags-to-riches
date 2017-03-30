@@ -12,10 +12,19 @@ import android.widget.ImageButton;
 import com.example.alejandro.app1.MainMenuActivity;
 import com.example.alejandro.app1.R;
 
+/**
+ * GameModeActivity class handles all functions in regards to navigating our GameMode screen
+ */
 public class GameModeActivity extends MainMenuActivity {
 
     private Button mGamePublic = null;
     private Button mBackButton = null;
+
+    /**
+     * General initializer of Android Activity
+     * @param savedInstanceState    saved Instance of previous activity
+     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

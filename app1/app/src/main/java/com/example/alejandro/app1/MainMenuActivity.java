@@ -18,11 +18,19 @@ import android.widget.ImageButton;
  * Created by alejandro on 3/17/2017.
  */
 
+/**
+ * MainMenuActivity class handles all functions in regards to navigating our main menu screen
+ */
 public class MainMenuActivity extends RegisterActivity {
 
     private ImageButton mSetting = null;
     private ImageButton mGameMode = null;
 
+
+    /**
+     * General initializer of Android Activity
+     * @param savedInstanceState    saved Instance of previous activity
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
