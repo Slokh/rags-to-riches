@@ -60,6 +60,10 @@ import static com.example.alejandro.app1.R.id.username;
  * Created by alejandro on 3/16/2017.
  */
 
+
+/**
+ * RegisterActivity class handles all functions in regards to registering a user into our system
+ */
 public class RegisterActivity extends LoginActivity{
 
     private Button mRegister = null;
@@ -67,6 +71,11 @@ public class RegisterActivity extends LoginActivity{
     private EditText mUsernameView;
     private EditText mPasswordView;
     private EditText mConfirmPasswordView;
+
+    /**
+     * General initializer of Android Activity
+     * @param savedInstanceState    saved Instance of previous activity
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +109,10 @@ public class RegisterActivity extends LoginActivity{
         });
     }
 
+    /**
+     * Validates the user's information based on our account creation constraints
+     * @return whether the user entered the correct information to register
+     */
     private boolean attemptRegister() {
         // Reset errors.
         mEmailView.setError(null);
@@ -180,6 +193,10 @@ public class RegisterActivity extends LoginActivity{
         return true;
     }
 
+    /**
+     * Validates the user's account with our current database of users to ensure no duplicates
+     * @return whether the account was able to be entered into the database
+     */
     private boolean attemptInsert() {
         // Reset errors.
         mEmailView.setError(null);
@@ -235,14 +252,29 @@ public class RegisterActivity extends LoginActivity{
         return false;
     }
 
+    /**
+     * Checks if the user actually entered an email
+     * @param email the user's entered email
+     * @return  true if valid
+     */
     private boolean isEmailValid(String email) {
         return email.contains("@");
     }
 
+    /**
+     * Checks if the user entered a long enough password
+     * @param password  the user's entered password
+     * @return  true if valid
+     */
     private boolean isPasswordValid(String password) {
         return password.length() > 4;
     }
 
+    /**
+     * Checks if the user entered a long enough username
+     * @param username  the user's entered username
+     * @return  true if valid
+     */
     private boolean isUsernameValid(String username) {
         return username.length() > 4;
     }

@@ -61,6 +61,9 @@ import android.view.LayoutInflater;
 import android.widget.EditText;
 import android.content.Intent;
 
+/**
+ * GameActivity class handles all functions in regards to the game itself
+ */
 
 public class GameActivity extends MainMenuActivity {
 
@@ -84,10 +87,13 @@ public class GameActivity extends MainMenuActivity {
     int timercount = 30;
     int turnvalue = 10;
     double initialbalance = 5000;
+
+    /**
+     * General initializer of Android Activity
+     * @param savedInstanceState    saved Instance of previous activity
+     */
+
     @Override
-
-
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
@@ -342,7 +348,10 @@ public class GameActivity extends MainMenuActivity {
     }
 
 
-
+    /**
+     * Generates a List of 10 companies to be used in our game and maps them to real life equivalents
+     * Data on the company is downloaded from our database and onto the user's device
+     */
     public void generateCompanies() {
         try {
             URL url = new URL("http://parallel.gg/rags-to-riches/generate-companies.php");
@@ -375,6 +384,10 @@ public class GameActivity extends MainMenuActivity {
         }
     }
 
+    /**
+     * Parses the CSV file returned from the database and creates company objects based on the data
+     * @param result
+     */
     public void parseCompanies(String result) {
         String[] companyObjects = result.split("/");
         for(String companyObject : companyObjects) {
@@ -391,6 +404,10 @@ public class GameActivity extends MainMenuActivity {
         }
     }
 
+    /**
+     * Grabs a user's portfolio from the database
+     * @return a generated portfolio constructed from the returned data
+     */
     public Portfolio grabPortfolio() {
         try {
             URL url = new URL("http://parallel.gg/rags-to-riches/grab-portfolio.php");
@@ -429,6 +446,11 @@ public class GameActivity extends MainMenuActivity {
         return null;
     }
 
+    /**
+     * Parse the portfolio CSV into a map of companies and their stocks
+     * @param result CSV to be parsed
+     * @return  Map of companies and their stocks
+     */
     public HashMap<Company, Integer> parsePortfolio(String result) {
         HashMap<Company, Integer> map = new HashMap<Company, Integer>();
         String[] split = result.split("/");
@@ -438,6 +460,11 @@ public class GameActivity extends MainMenuActivity {
         return map;
     }
 
+    /**
+     * Get a specific company
+     * @param companyName   Name of a company
+     * @return  the company object from the given name
+     */
     public Company getCompany(String companyName) {
         for(Company company : companies) {
             if(company.getRealName().equals(companyName)) return company;
