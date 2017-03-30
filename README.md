@@ -13,7 +13,7 @@ Download the ZIP file from our github page, and extract it on your computer to a
 
 When opening Android studio, click on the option to Import Project.
 Find the location where the ZIP file was extracted to. Click on Rags to Riches Master, and then select app1. Press OK.
-Android studio will then import the project. All files will automaticlly placed in their corresponding locations.
+Android studio will then import the project. All files will automatically placed in their corresponding locations.
 
 Press the triangular green button on the toolbar, labeled play. 
 Android Studio may require the setup of an Android virutal device. Proceed with basic device or other preferred. Then click OK.
