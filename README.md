@@ -1,6 +1,9 @@
 # Rags to Riches 
 **Stock Market Game for Software Engineering Course at Rutgers School of Engineering**
 
+*by Kartik Patel, Alejandro Aguilar, Deep Patel, Arjun Ohri, William He, Bryan Benalcazar, Elisa-Michelle Rodriguez*
+
+---
 To run the application, first download and install Android Studio on your computer. Can be found on the [Android Website](http://developer.android.com/studio/index.htmll).
 
  For help in the installation process: follow steps using this 
