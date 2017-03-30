@@ -1,9 +1,10 @@
 # Rags to Riches 
 Stock Market Game for Software Engineering Course at Rutgers School of Engineering
 
-To run the application, first download and install Android Studio on your computer. Can be found on the [Android Website] (https://developer.android.com/studio/index.html).
+To run the application, first download and install Android Studio on your computer. Can be found on the [Android Website](http://developer.android.com/studio/index.htmll).
 
-For help in the installation process: follow steps using this [JavaWorld Tutorial](hhttp://www.javaworld.com/article/3095406/android/android-studio-for-beginners-part-1-installation-and-setup.html)
+ For help in the installation process: follow steps using this 
+[JavaWorld Tutorial](http://www.javaworld.com/article/3095406/android/android-studio-for-beginners-part-1-installation-and-setup.html).
 
 Download the ZIP file from our github page, and extract it on your computer to a secure location. 
 
