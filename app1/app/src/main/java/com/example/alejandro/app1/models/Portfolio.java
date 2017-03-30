@@ -42,10 +42,15 @@ public class Portfolio {
         return balance;
     }
 
+    // The function getBalanceText() gets the balance and formats the double datatype to only show 2 numbers after the decimal point.
+
+
     public String getBalanceText(){
         NumberFormat formatter = NumberFormat.getCurrencyInstance();
         return formatter.format(balance);
     }
+
+    // The function updateBalance(double, int, boolean) updates the balance if the user buys or sells stocks.
 
     public void updateBalance(double priceAt, int amountofstocks, boolean buyorSell ){
         if (buyorSell == true){

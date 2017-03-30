@@ -17,6 +17,15 @@ public class GameModeActivity extends MainMenuActivity {
     private Button mGamePublic = null;
     private Button mBackButton = null;
     @Override
+
+    /*
+      The onCreate function in GameModeActivity class generates the screen to click on create public
+      or private game. It reacts based on if the user wants to start a public or private game.
+
+     */
+
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_mode);

@@ -24,6 +24,14 @@ public class MainMenuActivity extends RegisterActivity {
     private ImageButton mGameMode = null;
 
     @Override
+
+    /*
+
+    the function onCreate() in the MainMenuActivity that generates the main homescreen.
+
+     */
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainmenu);

@@ -68,6 +68,17 @@ public class RegisterActivity extends LoginActivity{
     private EditText mPasswordView;
     private EditText mConfirmPasswordView;
 
+
+
+    /*
+
+    the onCreate() functions in RegisterActivity generates the register activity. The
+    attemptRegister() function checks the login information with the database server. The validate
+    functions check the password and login ID for proper length and character values.
+
+     */
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

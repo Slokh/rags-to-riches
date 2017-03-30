@@ -86,7 +86,19 @@ public class GameActivity extends MainMenuActivity {
     double initialbalance = 5000;
     @Override
 
+/*
+  The onCreate Function is a major function as it generates the activity_game,
+  sets up the buttons for quitting and sets up the timelimit for each turn,
+  generates buttons for portfolio and standings,
+  a thread is created in order to have multiple request since this process will be done for each person online playing
+   
+  The generateCompanies function graps data from the database and puts the needed information in to a buffer 
 
+  The parseCompanies function parses informaton from the buffer and gets all 50 companies, their ticker, name and price
+  then adds that information to object Companies
+
+
+  */
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

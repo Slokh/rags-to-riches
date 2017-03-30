@@ -30,9 +30,6 @@ import java.util.List;
 import static android.R.attr.path;
 import static android.R.attr.port;
 
-/**
- * Created by Kartik on 3/20/2017.
- */
 
 public class CompanyAdapter extends GenericArrayAdapter<Company> implements NumberPicker.OnValueChangeListener {
 
@@ -55,6 +52,21 @@ public class CompanyAdapter extends GenericArrayAdapter<Company> implements Numb
     public void drawText(TextView textView, Company object) {
 
     }
+
+
+
+    /*
+
+    The function getView(final int position, View convertView, ViewGroup parent) is responsible for
+    organizing the buttons and the stock data on the chart in GameView. The prices and text are also
+    generated.
+
+    It listens to user commands such as when users press the buy and sell button and then updates the
+    users balance accordingly if proper conditions are met.
+
+
+     */
+
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -206,6 +218,17 @@ public class CompanyAdapter extends GenericArrayAdapter<Company> implements Numb
 
         return vi;
     }
+
+
+    /*
+
+    The function companyHistory(Company company) generates a company's stock trend graph
+    when a stock is clicked in game view. The graph is generated using the graphview packages that
+    are imported.
+
+
+     */
+
 
 
     public void companyHistory(Company company) {

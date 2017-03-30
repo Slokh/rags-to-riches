@@ -17,6 +17,13 @@ public class GameResultsActivity extends AppCompatActivity {
     private Button mQuitButton = null;
     EditText standings;
 
+    /*
+    The onCreate function in GameResultsActivity generates the standings screen. It pulls other
+    peoples balance values from the database and lists them.
+
+     */
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

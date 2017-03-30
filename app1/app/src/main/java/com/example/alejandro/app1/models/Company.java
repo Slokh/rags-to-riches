@@ -31,6 +31,9 @@ public class Company {
 
     public double getPrice() { return price; }
 
+    // The function getPriceText() gets the price of a company.
+
+
     public String getPriceText(){
         NumberFormat formatter = NumberFormat.getCurrencyInstance();
         return formatter.format(price);
