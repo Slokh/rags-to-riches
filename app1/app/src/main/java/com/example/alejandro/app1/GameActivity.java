@@ -422,6 +422,7 @@ public class GameActivity extends MainMenuActivity {
                 post_data += "&" + URLEncoder.encode("c"+i,"UTF-8")+"="+URLEncoder.encode("" + c.getRealName(),"UTF-8");
                 i++;
             }
+            System.out.println(post_data);
             bufferedWriter.write(post_data);
             bufferedWriter.flush();
             bufferedWriter.close();
