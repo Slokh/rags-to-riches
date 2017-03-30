@@ -20,7 +20,6 @@ public class GameResultsActivity extends AppCompatActivity {
     private Button mQuitButton = null;
     EditText standings;
 
-
     /**
      * General initializer of Android Activity
      * @param savedInstanceState    saved Instance of previous activity

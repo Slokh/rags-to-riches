@@ -92,7 +92,6 @@ public class GameActivity extends MainMenuActivity {
      * General initializer of Android Activity
      * @param savedInstanceState    saved Instance of previous activity
      */
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

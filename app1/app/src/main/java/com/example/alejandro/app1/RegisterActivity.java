@@ -76,7 +76,6 @@ public class RegisterActivity extends LoginActivity{
      * General initializer of Android Activity
      * @param savedInstanceState    saved Instance of previous activity
      */
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,6 +112,7 @@ public class RegisterActivity extends LoginActivity{
      * Validates the user's information based on our account creation constraints
      * @return whether the user entered the correct information to register
      */
+
     private boolean attemptRegister() {
         // Reset errors.
         mEmailView.setError(null);
