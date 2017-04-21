@@ -48,6 +48,7 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 import android.widget.TextView;
 
 import static android.R.attr.data;
+import static android.R.attr.port;
 import static android.R.id.list;
 import static android.R.id.message;
 import static android.media.CamcorderProfile.get;
@@ -257,11 +258,15 @@ public class GameActivity extends MainMenuActivity {
                     //             Log.d("SUP",Double.toString(portfolio.getBalance()));
 
                     turnCount.setText("Turn: " + String.valueOf(turn));
+
+                    updatePortfolio();
                 } else if(turn == 24) {
                     turn++;
                     mNextTurnButton.setText("Finish");
                     turnCount.setText("Turn: " + String.valueOf(turn));
+                    updatePortfolio();
                 } else if(turn == 25) {
+                    updatePortfolio();
                     Intent i = new Intent(view.getContext(),WaitEndActivity.class);
                     startActivity(i);
                 }
@@ -370,7 +375,6 @@ public class GameActivity extends MainMenuActivity {
                 post_data += "&" + URLEncoder.encode("c"+i,"UTF-8")+"="+URLEncoder.encode("" + c.getRealName(),"UTF-8");
                 i++;
             }
-            System.out.println(post_data);
             bufferedWriter.write(post_data);
             bufferedWriter.flush();
             bufferedWriter.close();
@@ -392,6 +396,45 @@ public class GameActivity extends MainMenuActivity {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void updatePortfolio() {
+        try {
+            URL url = new URL("http://parallel.gg/rags-to-riches/update-portfolio.php");
+            HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+            httpURLConnection.setRequestMethod("POST");
+            httpURLConnection.setDoOutput(true);
+            httpURLConnection.setDoInput(true);
+            OutputStream outputStream = httpURLConnection.getOutputStream();
+            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+            String post_data = URLEncoder.encode("id","UTF-8")+"="+URLEncoder.encode("" + account.getId(),"UTF-8");
+            post_data += "&" + URLEncoder.encode("t","UTF-8")+"="+URLEncoder.encode("" + turn,"UTF-8");
+            post_data += "&" + URLEncoder.encode("b","UTF-8")+"="+URLEncoder.encode(portfolio.getWebText(),"UTF-8");
+            int i = 0;
+            for(Company c : companies) {
+                post_data += "&" + URLEncoder.encode("c"+i,"UTF-8")+"="+URLEncoder.encode("" + c.getRealName(),"UTF-8");
+                post_data += "&" + URLEncoder.encode("d"+i,"UTF-8")+"="+URLEncoder.encode("" + portfolio.getAmountOfStock(c),"UTF-8");
+                i++;
+            }
+            bufferedWriter.write(post_data);
+            bufferedWriter.flush();
+            bufferedWriter.close();
+            outputStream.close();
+            InputStream inputStream = httpURLConnection.getInputStream();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"iso-8859-1"));
+            String result="";
+            String line="";
+            while((line = bufferedReader.readLine())!= null) {
+                result += line;
+            }
+            bufferedReader.close();
+            inputStream.close();
+            httpURLConnection.disconnect();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

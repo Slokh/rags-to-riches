@@ -79,6 +79,11 @@ public class Portfolio {
         return formatter.format(balance);
     }
 
+    public String getWebText() {
+        String blnce = balance + "";
+        return blnce.replace(".", "");
+    }
+
     /**
      *
      * @param priceAt           the price of the stock

@@ -13,20 +13,20 @@
         android:elevation="2dp" />
 
     <Button
-        android:text="Private Game"
+        android:text="Join Game"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/button2"
+        android:id="@+id/joinGame"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="191dp" />
 
     <Button
-        android:text="Public Game"
+        android:text="Create Game"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/goGameActivity"
+        android:id="@+id/createGame"
         android:layout_below="@+id/fab"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
