@@ -92,7 +92,7 @@
         android:id="@+id/editRemainingTimeTextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Turn Timer"
+        android:text="Next Turn"
         android:layout_below="@+id/relativeLayout"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />

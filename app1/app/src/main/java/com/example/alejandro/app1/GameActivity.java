@@ -86,6 +86,7 @@ public class GameActivity extends MainMenuActivity {
     Portfolio portfolio;
     int timercount = 30;
     int turnvalue = 10;
+    int turn = 1;
     double initialbalance = 5000;
 
     /**
@@ -239,98 +240,46 @@ public class GameActivity extends MainMenuActivity {
 
         // turn timer stuff //
 
+        mNextTurnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-        Thread t = new Thread(){
+                if(turn < 24) {
+                    for (int x = 0; x < companies.size(); x++) {
+                        (companies.get(x)).goToNextWeek();
+                    }
+                    turn++;
+                    displayAdapter = new CompanyAdapter(GameActivity.this, context, account, portfolio, companies, companies.get(0).returnWeek());
+
+                    ListView listView = (ListView) findViewById(R.id.companyList);
+                    listView.setAdapter(displayAdapter);
+                    //              balanceAmount.setText("Your Balance: " + portfolio.getBalance());
+                    //             Log.d("SUP",Double.toString(portfolio.getBalance()));
+
+                    turnCount.setText("Turn: " + String.valueOf(turn));
+                } else if(turn == 24) {
+                    turn++;
+                    mNextTurnButton.setText("Finish");
+                    turnCount.setText("Turn: " + String.valueOf(turn));
+                } else if(turn == 25) {
+                    Intent i = new Intent(view.getContext(),WaitEndActivity.class);
+                    startActivity(i);
+                }
+
+            }
+        });
+
+
+
+        Thread balanceUpdater = new Thread(){
             @Override public void run(){
                 while(!isInterrupted()){
-
-                    if (turnvalue == 25){
-                        //                       Intent i = new Intent(GameActivity.this, GameResultsActivity.class);
-                        //                      startActivity(i);
-
-                    }
-
-
                     try {
-
-                        mNextTurnButton.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-
-                                for (int x = 0; x < companies.size(); x++){
-                                    (companies.get(x)).goToNextWeek();
-                                }
-                                displayAdapter = new CompanyAdapter(GameActivity.this, context, account, portfolio, companies, companies.get(0).returnWeek());
-
-                                ListView listView = (ListView) findViewById(R.id.companyList);
-                                listView.setAdapter(displayAdapter);
-                                //              balanceAmount.setText("Your Balance: " + portfolio.getBalance());
-                                //             Log.d("SUP",Double.toString(portfolio.getBalance()));
-
-                                mNextTurnButton.setText("Waiting for other player...");
-                                turnCount.setText("Turn: " + String.valueOf(companies.get(0).returnWeek()-9));
-                                runOnUiThread(new Runnable() { @Override public void run() {
-
-                                    mNextTurnButton.setText("Waiting for other player...");
-
-                                }
-                                });
-
-                                try {
-
-                                    Thread.sleep(005);
-                                }catch(InterruptedException e ){
-                                    e.printStackTrace();
-                                }
-
-
-
-                                // stocks should update to next week here
-                                timercount = 29;
-
-                                turnCount.setText("Turn: " + String.valueOf(companies.get(0).returnWeek()-9));
-
-                            }
-                        });
-
-
                         Thread.sleep(1000);
-                        timercount--;
-
-
-
                         runOnUiThread(new Runnable() { @Override public void run() {
-                            if (timercount == 0){
-
-                                //
-                                // stocks should update to next week
-
-
-                                for (int x = 0; x < companies.size(); x++){
-                                    (companies.get(x)).goToNextWeek();
-                                }
-                                displayAdapter = new CompanyAdapter(GameActivity.this, context, account, portfolio, companies, companies.get(0).returnWeek());
-
-                                ListView listView = (ListView) findViewById(R.id.companyList);
-                                listView.setAdapter(displayAdapter);
-
-                                turnvalue++;
-                                turnCount.setText("Turn: " + String.valueOf(turnvalue-9));
-                                timercount = 30;
-
-                                if (turnvalue == 25){
-                                    //                           Intent i = new Intent(GameActivity.this, GameResultsActivity.class);
-                                    //                           startActivity(i);
-
-                                }
-
-                            }
-                            mNextTurnButton.setText("Next turn: " + String.valueOf(timercount/60) + ":" + (timercount % 60 < 10 ? "0" : "") + String.valueOf(timercount % 60));
                             balanceAmount.setText("Balance: " + portfolio.getBalanceText());
                         }
                         });
-
-
                     }catch(InterruptedException e ){
                         e.printStackTrace();
 
@@ -342,8 +291,7 @@ public class GameActivity extends MainMenuActivity {
 
         };
 
-        t.start();
-
+        balanceUpdater.start();
     }
 
 

@@ -41,6 +41,15 @@
                 android:value="com.example.alejandro.app1.MainMenuActivity" />
         </activity>
         <activity
+            android:name=".WaitEndActivity"
+            android:label="app1" >
+
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
+        <activity
             android:name=".GameModeActivity"
             android:label="@string/title_activity_game_mode"
             android:parentActivityName=".MainMenuActivity"
