@@ -90,6 +90,8 @@ public class GameActivity extends MainMenuActivity {
     int turn = 1;
     double initialbalance = 5000;
 
+    String code;
+
     /**
      * General initializer of Android Activity
      * @param savedInstanceState    saved Instance of previous activity
@@ -100,6 +102,7 @@ public class GameActivity extends MainMenuActivity {
         setContentView(R.layout.activity_game);
         final Bundle extras = getIntent().getExtras();
         account = new Account(extras.getInt("id"), extras.getString("email"), extras.getString("username"), extras.getString("password"));
+        code = extras.getString("code");
 
         turnCount = (TextView) findViewById(R.id.turnCount);
         turnCount.setText("Turn: " + String.valueOf(turnvalue-9));
@@ -124,7 +127,6 @@ public class GameActivity extends MainMenuActivity {
         ListView listView = (ListView) findViewById(R.id.companyList);
         listView.setAdapter(displayAdapter);
 //        balanceAmount.setText("Your Balance: " + portfolio.getBalance());
-        Log.d("SUP",Double.toString(portfolio.getBalance()));
         listView.setBackgroundColor(Color.WHITE);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -306,7 +308,7 @@ public class GameActivity extends MainMenuActivity {
      */
     public void generateCompanies() {
         try {
-            URL url = new URL("http://parallel.gg/rags-to-riches/generate-companies.php");
+            URL url = new URL("http://parallel.gg/rags-to-riches/grab-companies.php");
             HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
             httpURLConnection.setRequestMethod("POST");
             httpURLConnection.setDoOutput(true);
@@ -314,6 +316,7 @@ public class GameActivity extends MainMenuActivity {
             OutputStream outputStream = httpURLConnection.getOutputStream();
             BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
             String post_data = URLEncoder.encode("amount","UTF-8")+"="+URLEncoder.encode("" + amountOfCompanies,"UTF-8");
+            post_data += "&" + URLEncoder.encode("code","UTF-8")+"="+URLEncoder.encode("" + code,"UTF-8");
             bufferedWriter.write(post_data);
             bufferedWriter.flush();
             bufferedWriter.close();
@@ -350,7 +353,6 @@ public class GameActivity extends MainMenuActivity {
             double[] prices = new double[50];
             for(int i=0; i<50; i++) {
                 prices[i] = Double.parseDouble(split[i+3]);
-                Log.d(gameName, Double.toString(prices[i]));
             }
             companies.add(new Company(gameName, ticker, realName, prices, turnvalue));
         }
