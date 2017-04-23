@@ -48,7 +48,7 @@ import com.example.alejandro.app1.models.Portfolio;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
-
+import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import static android.R.attr.data;
@@ -103,10 +103,24 @@ public class GameActivity extends MainMenuActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+/*
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_game);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
+
+*/
+
+
+
+
+
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         super.onCreate(savedInstanceState);
-    //      setContentView(R.layout.activity_game);
+        setContentView(R.layout.activity_game);
         final Bundle extras = getIntent().getExtras();
         account = new Account(extras.getInt("id"), extras.getString("email"), extras.getString("username"), extras.getString("password"));
         code = extras.getString("code");
@@ -133,9 +147,10 @@ public class GameActivity extends MainMenuActivity {
 
         ListView listView = (ListView) findViewById(R.id.companyList);
         listView.setAdapter(displayAdapter);
-//        balanceAmount.setText("Your Balance: " + portfolio.getBalance());
+        balanceAmount.setText("Your Balance: " + portfolio.getBalance());
         listView.setBackgroundColor(Color.WHITE);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setHomeButtonEnabled(false);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -287,7 +302,6 @@ public class GameActivity extends MainMenuActivity {
 
             }
         });
-
 
 
         Thread balanceUpdater = new Thread(){
@@ -478,6 +492,10 @@ public class GameActivity extends MainMenuActivity {
      * @param companyName   Name of a company
      * @return  the company object from the given name
      */
+
+    @Override
+    public void onBackPressed() { }
+
     public Company getCompany(String companyName) {
         for(Company company : companies) {
             if(company.getRealName().equals(companyName)) return company;
@@ -493,6 +511,9 @@ public class GameActivity extends MainMenuActivity {
         return true;
 
     }
+
+
+
 
     //    @Override
     public boolean onOptionsItemSelected(MenuItem item) {

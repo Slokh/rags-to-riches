@@ -3,17 +3,28 @@
 
 
 
-    <menu>
         <item
             android:id="@+id/action_balance"
-            android:icon="@drawable/android"
-            android:title="Balance: "/>
+            android:icon="@drawable/money"
+            android:title="Balance: "
+            app:showAsAction = "ifRoom"
+            android:text = "Balance: "
+
+            />
+
+        <item
+            android:id="@+id/action_balanceText"
+            android:title="Balance: "
+            app:showAsAction = "ifRoom"
+            android:text = "Balance: "
+
+                />
         <item
             android:id="@+id/action_turnCount"
             android:icon="@drawable/android"
-            android:title="Turn: "/>
-    </menu>
-
+            android:title="Turn: "
+            app:showAsAction = "ifRoom"
+            android:text = "Turn: "/>
 
 
 </menu>
