@@ -10,9 +10,12 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -481,4 +484,38 @@ public class GameActivity extends MainMenuActivity {
         }
         return null;
     }
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.gamemenu,menu);
+        return true;
+
+    }
+
+    //    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+
+//            case R.id.home:
+ //               NavUtils.navigateUpFromSameTask(this);
+  //              return true;
+
+            case R.id.action_settings:
+
+                Intent k = new Intent(GameActivity.this, SettingsActivity.class);
+                startActivity(k);
+                return true;
+            case R.id.action_achievements:
+                //stuff
+                return true;
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
 }

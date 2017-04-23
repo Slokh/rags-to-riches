@@ -2,11 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ADCC93"
+    android:background="#FF388E3C"
     android:weightSum="1">
+
+    <Button
+        android:id="@+id/button2"
+        android:textSize="@dimen/font_size"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_weight="1"
+        android:text="Find Public Game"
+        />
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -47,13 +58,38 @@
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="350dp"
+            android:layout_height="200dp"
             app:srcCompat="@drawable/ragstoricheslogo"
             android:layout_above="@+id/goGameModeActivity"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="23dp" />
 
+        <Button
+            android:id="@+id/findPublicGame"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_alignLeft="@+id/createGame"
+            android:layout_alignStart="@+id/createGame"
+            android:layout_alignTop="@+id/goGameModeActivity"
+            android:text="Find Public Game" />
+
+        <Button
+            android:id="@+id/createGame"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_below="@+id/findPublicGame"
+            android:layout_centerHorizontal="true"
+            android:text="Create Private Game" />
+
+        <Button
+            android:id="@+id/joinGame"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:text="Join Private Game"
+            android:layout_below="@+id/createGame"
+            android:layout_alignLeft="@+id/createGame"
+            android:layout_alignStart="@+id/createGame" />
     </RelativeLayout>
 
 </LinearLayout>

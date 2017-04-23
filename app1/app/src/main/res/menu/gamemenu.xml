@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+    <menu>
+        <item
+            android:id="@+id/action_balance"
+            android:icon="@drawable/android"
+            android:title="Balance: "/>
+        <item
+            android:id="@+id/action_turnCount"
+            android:icon="@drawable/android"
+            android:title="Turn: "/>
+    </menu>
+
+
+
+</menu>
