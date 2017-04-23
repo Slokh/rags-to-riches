@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -98,8 +99,11 @@ public class GameActivity extends MainMenuActivity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game);
+    //      setContentView(R.layout.activity_game);
         final Bundle extras = getIntent().getExtras();
         account = new Account(extras.getInt("id"), extras.getString("email"), extras.getString("username"), extras.getString("password"));
         code = extras.getString("code");

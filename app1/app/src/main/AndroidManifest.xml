@@ -25,13 +25,20 @@
         </activity>
         <activity
             android:name=".RegisterActivity"
-            android:label="app1" />
+            android:label="" />
         <activity
             android:name=".MainMenuActivity"
-            android:label="app1" />
+            android:label="Main Menu" />
+
+
         <activity
             android:name=".GameActivity"
-            android:label="app1" />
+            android:label=""
+            android:parentActivityName=".MainMenuActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.alejandro.app1.MainMenuActivity" />
+        </activity>
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
@@ -42,7 +49,7 @@
         </activity>
         <activity
             android:name=".WaitEndActivity"
-            android:label="app1" >
+            android:label="Waiting Room" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -50,7 +57,7 @@
         </activity>
         <activity
             android:name=".WaitBeginActivity"
-            android:label="app1" >
+            android:label="Waiting Room" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

@@ -25,6 +25,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
@@ -278,5 +279,10 @@ public class RegisterActivity extends LoginActivity{
     private boolean isUsernameValid(String username) {
         return username.length() > 4;
     }
+
+    public boolean onCreateOptionsmenu(Menu menu){
+    return false;
+    }
+
 
 }

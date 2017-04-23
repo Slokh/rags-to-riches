@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,18 +8,11 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.alejandro.app1.LoginActivity">
+    android:paddingTop="32dp"
+    tools:context="com.example.alejandro.app1.LoginActivity"
+    android:weightSum="1">
 
     <!-- Login progress -->
-    <TextView
-        android:text="Welcome"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView"
-        android:textSize="24sp"
-        android:textAlignment="center"
-        tools:text="Welcome" />
 
     <ProgressBar
         android:id="@+id/login_progress"
@@ -28,10 +22,16 @@
         android:layout_marginBottom="8dp"
         android:visibility="gone" />
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        app:srcCompat="@drawable/ragstoricheslogo" />
+
     <ScrollView
         android:id="@+id/login_form"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="190dp">
 
         <LinearLayout
             android:id="@+id/email_login_form"
@@ -73,9 +73,9 @@
             </android.support.design.widget.TextInputLayout>
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/goRegisterActivity"
@@ -83,9 +83,9 @@
                     android:layout_width="148dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
+                    android:layout_weight="0.37"
                     android:text="@string/action_register"
-                    android:textStyle="bold"
-                    android:layout_weight="0.37" />
+                    android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/goLoginActivity"
@@ -93,9 +93,9 @@
                     android:layout_width="148dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
+                    android:layout_weight="0.37"
                     android:text="@string/action_sign_in"
-                    android:textStyle="bold"
-                    android:layout_weight="0.37" />
+                    android:textStyle="bold" />
 
             </LinearLayout>
 

@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ADCC93"
     android:weightSum="1">
 
     <RelativeLayout
@@ -12,87 +13,46 @@
         android:layout_height="match_parent">
 
         <ImageButton
-            android:layout_width="match_parent"
-            android:layout_height="165dp"
-            app:srcCompat="@drawable/android"
-            android:id="@+id/goSettingsActivity"
-            android:scaleType="centerInside"
-            android:background="@color/colorPrimaryDark"
-            android:elevation="0dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <ImageButton
-            android:layout_width="match_parent"
-            android:layout_height="165dp"
-            app:srcCompat="@drawable/android"
             android:id="@+id/goGameModeActivity"
-            android:scaleType="centerInside"
-            android:textAlignment="center"
-            android:text ="Game Modes"
-            android:background="@color/colorPrimaryDark"
-            tools:text="@string/Game_Modes"
-            android:layout_above="@+id/goSettingsActivity"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:elevation="0dp" />
-
-        <ImageButton
             android:layout_width="match_parent"
             android:layout_height="165dp"
-            app:srcCompat="@drawable/android"
-            android:id="@+id/AccountInformation"
-            android:scaleType="centerInside"
             android:background="@color/colorPrimaryDark"
             android:elevation="0dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_above="@+id/goGameModeActivity"
-            android:layout_alignParentTop="true" />
-
-        <TextView
-            android:text="Settings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView7"
+            android:scaleType="centerInside"
+            android:text="Game Modes"
             android:textAlignment="center"
-            android:textColor="@android:color/background_dark"
-            android:layout_marginBottom="65dp"
+            app:srcCompat="@drawable/android"
+            tools:text="@string/Game_Modes"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:textSize="16sp" />
+            android:layout_marginBottom="89dp" />
 
         <TextView
-            android:layout_height="wrap_content"
-            tools:text="Game Modes"
-            android:typeface="normal"
-            android:text="Game Modes"
-            android:fontFamily="sans-serif"
-            android:visibility="visible"
-            android:textColor="@android:color/background_dark"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:text="Game Modes"
             android:textAlignment="center"
+            android:textColor="@android:color/background_dark"
             android:textSize="12sp"
-            android:layout_marginBottom="71dp"
-            android:layout_above="@+id/goSettingsActivity"
+            android:typeface="normal"
+            android:visibility="visible"
+            tools:text="Game Modes"
+            android:layout_marginBottom="68dp"
+            android:layout_alignBottom="@+id/goGameModeActivity"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:id="@+id/textView4" />
 
-        <TextView
-            android:text="Achievements "
+        <ImageView
+            android:id="@+id/imageView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView4"
-            android:textColor="@android:color/background_dark"
-            android:textAlignment="center"
-            android:textSize="12sp"
-            android:layout_marginBottom="77dp"
+            app:srcCompat="@drawable/ragstoricheslogo"
             android:layout_above="@+id/goGameModeActivity"
-            android:layout_centerHorizontal="true" />
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
     </RelativeLayout>
 
