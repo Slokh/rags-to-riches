@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:text="First Place"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/firstplace"
+        android:textAlignment="center"
+        android:textSize="30sp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="195dp">
+
+        <ImageView
+            android:layout_height="120dp"
+            app:srcCompat="@drawable/android"
+            android:id="@+id/firstImageView"
+            android:layout_width="120dp"
+            android:layout_weight="0.12" />
+
+        <TextView
+            android:text="FIRST"
+            android:layout_width="wrap_content"
+            android:layout_height="78dp"
+            android:id="@+id/first"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:paddingTop="50dp" />
+    </LinearLayout>
+
+    <TextView
+        android:text="Second Place"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/secondplace"
+        android:textAlignment="center"
+        android:textSize="30sp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="195dp">
+
+        <ImageView
+            android:layout_height="120dp"
+            app:srcCompat="@drawable/android"
+            android:id="@+id/secondImageView"
+            android:layout_width="120dp"
+            android:layout_weight="0.12" />
+
+        <TextView
+            android:text="SECOND"
+            android:layout_width="wrap_content"
+            android:layout_height="78dp"
+            android:id="@+id/second"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:paddingTop="50dp" />
+    </LinearLayout>
+
+    <Button
+        android:text="Main Menu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/backButton"
+        android:textAlignment="center" />
+
+</LinearLayout>

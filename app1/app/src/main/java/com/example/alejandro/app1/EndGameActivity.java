@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -18,60 +18,46 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
- * Created by kp605 on 4/21/17.
+ * Created by Kartik on 4/22/2017.
  */
 
-public class WaitEndActivity extends MainMenuActivity {
+public class EndGameActivity extends MainMenuActivity {
 
-    private ProgressBar spinner;
-    public boolean waiting = true;
-    /**
-     * General initializer of Android Activity
-     * @param savedInstanceState    saved Instance of previous activity
-     */
+    TextView first;
+    TextView second;
+    private Button backButton = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wait_end);
+        setContentView(R.layout.activity_end_game);
 
         final Bundle extras = getIntent().getExtras();
-        spinner=(ProgressBar)findViewById(R.id.progressBar);
-        spinner.setVisibility(View.VISIBLE);
+        first = (TextView) findViewById(R.id.first);
+        second = (TextView) findViewById(R.id.second);
+        backButton = (Button) findViewById(R.id.backButton);
 
-        final Intent i = new Intent(this, EndGameActivity.class);
-        i.putExtra("id", extras.getInt("id"));
-        i.putExtra("email", extras.getString("email"));
-        i.putExtra("username", extras.getString("username"));
-        i.putExtra("password", extras.getString("password"));
+        setResults();
 
-        new Thread(new Runnable() {
+        backButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
-                while (waiting) {
-                    try {
-                        // Sleep for 200 milliseconds.
-                        //Just to display the progress slowly
-                        Thread.sleep(5000);
-                        if (playerCount() == 2){
-                            waiting = false;
-                            startActivity(i);
-                        }
+            public void onClick(View view) {
+                Intent i = new Intent(view.getContext(), MainMenuActivity.class);
+                i.putExtra("id", extras.getInt("id"));
+                i.putExtra("email", extras.getString("email"));
+                i.putExtra("username", extras.getString("username"));
+                i.putExtra("password", extras.getString("password"));
+                startActivity(i);
+                // attemptLogin();
+            }
 
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                } // while loop
-            } // run()
-        }).start();
-
-
+        });
     }
 
 
-    public int playerCount() {
+    public void setResults() {
         try {
-            URL url = new URL("http://parallel.gg/rags-to-riches/end-count.php");
+            URL url = new URL("http://parallel.gg/rags-to-riches/get-results.php");
             HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
             httpURLConnection.setRequestMethod("POST");
             httpURLConnection.setDoOutput(true);
@@ -90,16 +76,19 @@ public class WaitEndActivity extends MainMenuActivity {
             while((line = bufferedReader.readLine())!= null) {
                 result += line;
             }
+            String[] players = result.split("/");
+            first.setText(players[0].split(",")[0] + ": " + players[0].split(",")[1]);
+            if(players[1].length() > 1) {
+                second.setText(players[1].split(",")[0] + ": " + players[1].split(",")[1]);
+            }
             bufferedReader.close();
             inputStream.close();
             httpURLConnection.disconnect();
-            return Integer.parseInt(result);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return 0;
     }
 
 }

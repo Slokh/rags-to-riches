@@ -268,8 +268,13 @@ public class GameActivity extends MainMenuActivity {
                     turnCount.setText("Turn: " + String.valueOf(turn));
                     updatePortfolio();
                 } else if(turn == 25) {
+                    sellEverything();
                     updatePortfolio();
                     Intent i = new Intent(view.getContext(),WaitEndActivity.class);
+                    i.putExtra("id", extras.getInt("id"));
+                    i.putExtra("email", extras.getString("email"));
+                    i.putExtra("username", extras.getString("username"));
+                    i.putExtra("password", extras.getString("password"));
                     startActivity(i);
                 }
 
@@ -299,6 +304,14 @@ public class GameActivity extends MainMenuActivity {
         };
 
         balanceUpdater.start();
+    }
+
+    public void sellEverything() {
+        for(Company c : companies) {
+            int amt = portfolio.getAmountOfStock(c);
+            portfolio.updateStock(c, 0);
+            portfolio.updateBalance(c.getPrice(), amt, false);
+        }
     }
 
 

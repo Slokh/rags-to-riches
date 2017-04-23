@@ -70,8 +70,8 @@ public class GameModeActivity extends MainMenuActivity {
                                 i.putExtra("username", extras.getString("username"));
                                 i.putExtra("password", extras.getString("password"));
                                 i.putExtra("code", code);
-                                createPortfolio(extras.getInt("id"));
                                 updateGameInfo(code);
+                                createPortfolio(extras.getInt("id"));
                                 startActivity(i);
                                 dialog.dismiss();
                             }
@@ -188,6 +188,7 @@ public class GameModeActivity extends MainMenuActivity {
             while((line = bufferedReader.readLine())!= null) {
                 result += line;
             }
+            System.out.println(result);
             bufferedReader.close();
             inputStream.close();
             httpURLConnection.disconnect();

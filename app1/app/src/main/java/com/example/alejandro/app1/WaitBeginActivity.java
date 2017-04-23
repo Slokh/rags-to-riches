@@ -57,7 +57,7 @@ public class WaitBeginActivity extends MainMenuActivity {
                         // Sleep for 200 milliseconds.
                         //Just to display the progress slowly
                         Thread.sleep(5000);
-                        if (playerCount() == 1){
+                        if (playerCount() == 2){
                             waiting = false;
                             startActivity(i);
                         }
@@ -74,7 +74,7 @@ public class WaitBeginActivity extends MainMenuActivity {
 
     public int playerCount() {
         try {
-            URL url = new URL("http://parallel.gg/rags-to-riches/player-count.php");
+            URL url = new URL("http://parallel.gg/rags-to-riches/begin-count.php");
             HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
             httpURLConnection.setRequestMethod("POST");
             httpURLConnection.setDoOutput(true);
