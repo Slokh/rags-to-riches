@@ -79,9 +79,15 @@ public class Portfolio {
         return formatter.format(balance);
     }
 
-    public String getWebText() {
-        String blnce = balance + "";
-        return blnce.replace(".", "");
+    public String getDollars() {
+        int blnce = (int) balance;
+        return blnce + "";
+    }
+
+    public String getCents() {
+        int blnce = (int) balance;
+        int cents = (int) (balance - blnce) * 100;
+        return cents + "";
     }
 
     /**

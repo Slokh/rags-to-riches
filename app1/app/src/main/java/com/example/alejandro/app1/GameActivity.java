@@ -451,7 +451,8 @@ public class GameActivity extends MainMenuActivity {
             BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
             String post_data = URLEncoder.encode("id","UTF-8")+"="+URLEncoder.encode("" + account.getId(),"UTF-8");
             post_data += "&" + URLEncoder.encode("t","UTF-8")+"="+URLEncoder.encode("" + turn,"UTF-8");
-            post_data += "&" + URLEncoder.encode("b","UTF-8")+"="+URLEncoder.encode(portfolio.getWebText(),"UTF-8");
+            post_data += "&" + URLEncoder.encode("d","UTF-8")+"="+URLEncoder.encode(portfolio.getDollars(),"UTF-8");
+            post_data += "&" + URLEncoder.encode("c","UTF-8")+"="+URLEncoder.encode(portfolio.getCents(),"UTF-8");
             int i = 0;
             for(Company c : companies) {
                 post_data += "&" + URLEncoder.encode("c"+i,"UTF-8")+"="+URLEncoder.encode("" + c.getRealName(),"UTF-8");
