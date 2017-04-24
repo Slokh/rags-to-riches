@@ -40,6 +40,7 @@ public class CompanyAdapter extends GenericArrayAdapter<Company> implements Numb
     private Portfolio portfolio;
 
 
+
     public CompanyAdapter(Activity activity, Context context, Account account, Portfolio portfolio, List<Company> companies, int priceAt) {
         super(context, companies);
         this.activity = activity;
@@ -80,8 +81,8 @@ public class CompanyAdapter extends GenericArrayAdapter<Company> implements Numb
         Button sellButton = (Button) vi.findViewById(R.id.companySellButton);
         ImageView imageView = (ImageView) vi.findViewById(R.id.companyImage);
         final TextView balanceAmount = (TextView) vi.findViewById(R.id.balanceAmount);
-
-        imageView.setBackgroundColor(Color.GRAY);
+        imageView.setImageResource(R.drawable.company);
+        imageView.setBackgroundColor(Color.WHITE);
 
         final Company company = data.get(position);
 

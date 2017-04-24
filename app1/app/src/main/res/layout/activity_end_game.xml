@@ -18,32 +18,32 @@
         android:layout_height="195dp">
 
         <ImageView
-            android:layout_height="120dp"
-            app:srcCompat="@mipmap/ic_launcher"
             android:id="@+id/firstImageView"
-            android:layout_width="125dp" />
+            android:layout_width="125dp"
+            android:layout_height="120dp"
+            app:srcCompat="@drawable/a12" />
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.08">
+            android:layout_weight="0.08"
+            android:orientation="vertical">
 
             <TextView
-                android:text="FIRST"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/firstName"
-                android:textAlignment="center"
-                android:paddingTop="50dp" />
-
-            <TextView
-                android:text="FIRST"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingTop="50dp"
+                android:text="FIRST"
+                android:textAlignment="center" />
+
+            <TextView
                 android:id="@+id/firstBalance"
-                android:textAlignment="center"
-                android:paddingTop="50dp" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="50dp"
+                android:text="FIRST"
+                android:textAlignment="center" />
         </LinearLayout>
 
     </LinearLayout>
@@ -63,7 +63,7 @@
 
         <ImageView
             android:layout_height="120dp"
-            app:srcCompat="@mipmap/ic_launcher"
+            app:srcCompat="@drawable/a2"
             android:id="@+id/secondImageView"
             android:layout_weight="0.00"
             android:layout_width="125dp" />
