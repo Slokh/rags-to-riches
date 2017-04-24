@@ -61,21 +61,6 @@
         android:layout_alignStart="@+id/imageView3"
         android:textColor="#000"/>
 
-    <Button
-        android:id="@+id/standingsButton"
-        style="?android:textAppearanceSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_column="1"
-        android:layout_row="22"
-        android:layout_weight="1.00"
-        android:text="@string/action_standings"
-        android:textStyle="bold"
-        android:textColor="#000"
-
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-
 
     <Button
         android:id="@+id/editRemainingTimeTextButton"

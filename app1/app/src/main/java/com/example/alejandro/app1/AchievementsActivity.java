@@ -64,6 +64,8 @@ public class AchievementsActivity extends MainMenuActivity {
 
         int wins = Integer.parseInt(achievementResults[0]);
         int earnings = Integer.parseInt(achievementResults[1]);
+        if(wins < 0) wins = 0;
+        if(earnings < 0) earnings = 0;
 
         achievements = new ArrayList<Achievement>();
         achievements.add(new Achievement(achievementsArray[0], wins >= 1 ? "Completed" : wins + "/1"));

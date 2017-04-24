@@ -39,6 +39,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.alejandro.app1.MainMenuActivity" />
         </activity>
+        <activity android:name=".IntroActivity"
+            android:label="@string/app_intro" />
         <activity
             android:name=".EndGameActivity"
             android:label="app1" />

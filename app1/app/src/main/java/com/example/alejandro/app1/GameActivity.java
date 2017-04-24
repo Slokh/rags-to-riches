@@ -219,44 +219,10 @@ public class GameActivity extends MainMenuActivity {
 
                 String message = "";
                 for(Company c : portfolio.getStocks().keySet()) {
-                    message += c.getName() + ": " + "" + portfolio.getAmountOfStock(c) + "\n";
+                    if(portfolio.getAmountOfStock(c) > 0) {
+                        message += c.getName() + ": " + "" + portfolio.getAmountOfStock(c) + "\n";
+                    }
                 }
-
-                alertDialog.setMessage(message);
-                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialogSuccess, int which) {
-                                dialogSuccess.dismiss();
-                            }
-                        });
-                alertDialog.show();
-            }
-        });
-
-
-        mStandingsButton = (Button) findViewById(R.id.standingsButton);
-
-        mStandingsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog alertDialog = new AlertDialog.Builder(GameActivity.this).create();
-                alertDialog.setTitle("Standings");
-
-
-                // player 2, 3, 4 balance amounts should update here from server:
-                //
-                //
-
-
-                double Standingsarray[] = {(Math. random() * 9999 + 1000),(Math. random() * 9999 + 1000),(Math. random() * 9999 + 1000)};
-
-                //
-                //
-                NumberFormat formatter = NumberFormat.getCurrencyInstance();
-
-
-                String message = "You: " + formatter.format(portfolio.getBalance()) + "\nPlayer 2: "+ formatter.format(Standingsarray[0]) + " \nPlayer 3: " + formatter.format(Standingsarray[1]) + "\nPlayer 4: " + formatter.format(Standingsarray[2]) +"\n";
-
 
                 alertDialog.setMessage(message);
                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
