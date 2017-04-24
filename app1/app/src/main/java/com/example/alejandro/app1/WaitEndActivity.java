@@ -16,6 +16,9 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
+
+import static android.R.attr.id;
 
 /**
  * Created by kp605 on 4/21/17.
@@ -25,6 +28,8 @@ public class WaitEndActivity extends MainMenuActivity {
 
     private ProgressBar spinner;
     public boolean waiting = true;
+
+    int id = 0;
     /**
      * General initializer of Android Activity
      * @param savedInstanceState    saved Instance of previous activity
@@ -39,8 +44,10 @@ public class WaitEndActivity extends MainMenuActivity {
         spinner=(ProgressBar)findViewById(R.id.progressBar);
         spinner.setVisibility(View.VISIBLE);
 
+        id = extras.getInt("id");
+
         final Intent i = new Intent(this, EndGameActivity.class);
-        i.putExtra("id", extras.getInt("id"));
+        i.putExtra("id", id);
         i.putExtra("email", extras.getString("email"));
         i.putExtra("username", extras.getString("username"));
         i.putExtra("password", extras.getString("password"));
@@ -53,7 +60,7 @@ public class WaitEndActivity extends MainMenuActivity {
                         // Sleep for 200 milliseconds.
                         //Just to display the progress slowly
                         Thread.sleep(5000);
-                        if (playerCount() == 2){
+                        if (playerCount() == 1){
                             waiting = false;
                             startActivity(i);
                         }
@@ -67,7 +74,6 @@ public class WaitEndActivity extends MainMenuActivity {
 
 
     }
-
 
     public int playerCount() {
         try {

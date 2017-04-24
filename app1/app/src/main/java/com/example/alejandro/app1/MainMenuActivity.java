@@ -236,7 +236,13 @@ public class MainMenuActivity extends AppCompatActivity {
                 startActivity(k);
                 return true;
             case R.id.action_achievements:
-                //stuff
+                final Bundle extras = getIntent().getExtras();
+                Intent l = new Intent(MainMenuActivity.this, AchievementsActivity.class);
+                l.putExtra("id", extras.getInt("id"));
+                l.putExtra("email", extras.getString("email"));
+                l.putExtra("username", extras.getString("username"));
+                l.putExtra("password", extras.getString("password"));
+                startActivity(l);
                 return true;
             default:
             // If we got here, the user's action was not recognized.

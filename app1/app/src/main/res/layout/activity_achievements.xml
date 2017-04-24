@@ -8,62 +8,47 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.alejandro.app1.MainMenuActivity" >
 
-    <!--<LinearLayout-->
-    <!--android:id="@+id/sign_in_buttons"-->
-    <!--android:layout_width="fill_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_alignParentTop="true"-->
-    <!--android:orientation="horizontal" >-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <!-- sign-in button -->
+        <Button
+            android:id="@+id/goMainMenuActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:text="Back" />
 
-    <!--<com.google.android.gms.common.SignInButton-->
-    <!--android:id="@+id/sign_in_button"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content" />-->
+        <ListView
+            android:id="@+id/achievementList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_above="@+id/goMainMenuActivity"
+            android:layout_below="@+id/guess_text" />
 
-    <!-- sign-out button -->
+        <TextView
+            android:id="@+id/guess_text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Achievements"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"></TextView>
 
-    <Button
-        android:id="@+id/sign_out_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sign Out"
-        android:visibility="gone" />
+    </RelativeLayout>
 
-    <!-- show achievements -->
 
-    <Button
-        android:id="@+id/show_achievements"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Achievements" />
-
-    <!--</LinearLayout>-->
-
-    <Button
-        android:id="@+id/goMainMenuActivity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:text="Back" />
-
-    <TextView
-        android:id="@+id/guess_text"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Glossary"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:layout_weight="1"
-        android:textAlignment="center"
-        android:layout_below="@+id/show_achievements"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="12dp"></TextView>
     <!--android:layout_below="@+id/sign_in_buttons"-->
     <!--android:layout_alignParentLeft="true"-->
     <!--android:layout_alignParentStart="true" />-->

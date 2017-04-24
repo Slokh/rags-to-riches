@@ -16,6 +16,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 
 /**
  * Created by Kartik on 4/22/2017.
@@ -23,8 +24,10 @@ import java.net.URL;
 
 public class EndGameActivity extends MainMenuActivity {
 
-    TextView first;
-    TextView second;
+    TextView firstName;
+    TextView secondName;
+    TextView firstBalance;
+    TextView secondBalance;
     private Button backButton = null;
 
     @Override
@@ -33,8 +36,10 @@ public class EndGameActivity extends MainMenuActivity {
         setContentView(R.layout.activity_end_game);
 
         final Bundle extras = getIntent().getExtras();
-        first = (TextView) findViewById(R.id.first);
-        second = (TextView) findViewById(R.id.second);
+        firstName = (TextView) findViewById(R.id.firstName);
+        secondName = (TextView) findViewById(R.id.secondName);
+        firstBalance = (TextView) findViewById(R.id.firstBalance);
+        secondBalance = (TextView) findViewById(R.id.secondBalance);
         backButton = (Button) findViewById(R.id.backButton);
 
         setResults();
@@ -77,9 +82,11 @@ public class EndGameActivity extends MainMenuActivity {
                 result += line;
             }
             String[] players = result.split("/");
-            first.setText(players[0].split(",")[0] + ": " + players[0].split(",")[1]);
+            firstName.setText(players[0].split(",")[0]);
+            firstBalance.setText(players[0].split(",")[1]);
             if(players[1].length() > 1) {
-                second.setText(players[1].split(",")[0] + ": " + players[1].split(",")[1]);
+                secondName.setText(players[1].split(",")[0]);
+                secondBalance.setText(players[1].split(",")[1]);
             }
             bufferedReader.close();
             inputStream.close();

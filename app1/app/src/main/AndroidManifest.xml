@@ -41,11 +41,18 @@
         </activity>
         <activity
             android:name=".EndGameActivity"
-            android:label="app1"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+            android:label="app1" />
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
+            android:parentActivityName=".MainMenuActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.alejandro.app1.MainMenuActivity" />
+        </activity>
+        <activity
+            android:name=".AchievementsActivity"
+            android:label="@string/title_activity_achievement"
             android:parentActivityName=".MainMenuActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
