@@ -26,8 +26,6 @@ public class EndGameActivity extends MainMenuActivity {
 
     TextView firstName;
     TextView secondName;
-    TextView firstBalance;
-    TextView secondBalance;
     private Button backButton = null;
 
     @Override
@@ -38,8 +36,6 @@ public class EndGameActivity extends MainMenuActivity {
         final Bundle extras = getIntent().getExtras();
         firstName = (TextView) findViewById(R.id.firstName);
         secondName = (TextView) findViewById(R.id.secondName);
-        firstBalance = (TextView) findViewById(R.id.firstBalance);
-        secondBalance = (TextView) findViewById(R.id.secondBalance);
         backButton = (Button) findViewById(R.id.backButton);
 
         setResults();
@@ -82,11 +78,9 @@ public class EndGameActivity extends MainMenuActivity {
                 result += line;
             }
             String[] players = result.split("/");
-            firstName.setText(players[0].split(",")[0]);
-            firstBalance.setText(players[0].split(",")[1]);
+            firstName.setText(players[0].split(",")[0]+"\nBalance: $ "+players[0].split(",")[1]);
             if(players[1].length() > 1) {
-                secondName.setText(players[1].split(",")[0]);
-                secondBalance.setText(players[1].split(",")[1]);
+                secondName.setText(players[1].split(",")[0]+"\nBalance: $ "+players[1].split(",")[1]);
             }
             bufferedReader.close();
             inputStream.close();

@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:weightSum="1">
 
     <TextView
         android:text="First Place"
@@ -37,13 +38,6 @@
                 android:text="FIRST"
                 android:textAlignment="center" />
 
-            <TextView
-                android:id="@+id/firstBalance"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="50dp"
-                android:text="FIRST"
-                android:textAlignment="center" />
         </LinearLayout>
 
     </LinearLayout>
@@ -59,7 +53,8 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="195dp">
+        android:layout_height="195dp"
+        android:layout_weight="0.93">
 
         <ImageView
             android:layout_height="120dp"
@@ -72,7 +67,8 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.08">
+            android:layout_weight="0.08"
+            android:weightSum="1">
 
             <TextView
                 android:text="FIRST"
@@ -80,22 +76,16 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/secondName"
                 android:textAlignment="center"
-                android:paddingTop="50dp" />
+                android:paddingTop="50dp"
+                android:layout_weight="0.09" />
 
-            <TextView
-                android:text="FIRST"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/secondBalance"
-                android:textAlignment="center"
-                android:paddingTop="50dp" />
         </LinearLayout>
     </LinearLayout>
 
     <Button
         android:text="Main Menu"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/backButton"
         android:textAlignment="center" />
 
