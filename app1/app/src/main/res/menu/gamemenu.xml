@@ -7,7 +7,7 @@
             android:id="@+id/action_balance"
             android:icon="@drawable/money"
             android:title="Balance: "
-            app:showAsAction = "ifRoom"
+            app:showAsAction = "always"
             android:text = "Balance: "
 
             />
@@ -15,16 +15,29 @@
         <item
             android:id="@+id/action_balanceText"
             android:title="Balance: "
-            app:showAsAction = "ifRoom"
-            android:text = "Balance: "
+            app:showAsAction = "always"
+            android:text = "Balance: "/>
 
-                />
         <item
-            android:id="@+id/action_turnCount"
-            android:icon="@drawable/android"
+            android:id="@+id/action_balanceNumber"
+            android:title="  "
+            app:showAsAction = "always"
+            android:text = " "/>
+
+
+
+        <item
+            android:id="@+id/action_turnText"
             android:title="Turn: "
-            app:showAsAction = "ifRoom"
+            app:showAsAction = "always"
             android:text = "Turn: "/>
+
+        <item
+            android:id="@+id/action_turnNumber"
+            android:title=""
+            app:showAsAction = "always"
+            android:text = "Turn: "/>
+
 
 
 </menu>

@@ -2,6 +2,7 @@ package com.example.alejandro.app1;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import android.content.Intent;
@@ -28,7 +29,8 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.security.SecureRandom;
 import java.util.Random;
-
+import android.support.v7.widget.Toolbar;
+import android.support.v7.app.AppCompatActivity;
 import static android.os.Build.VERSION_CODES.M;
 
 //package com.example.alejandro.app1;
@@ -49,7 +51,7 @@ public class MainMenuActivity extends AppCompatActivity {
     private ImageButton mSetting = null;
     private ImageButton mGameMode = null;
     EditText editText = null;
-
+    Toolbar mActionBarToolbar;
     private Button mCreateGame = null;
     private Button mJoinGame = null;
 
@@ -70,7 +72,12 @@ public class MainMenuActivity extends AppCompatActivity {
 
 
 
-
+        mActionBarToolbar = (Toolbar) findViewById(R.id.app_bar);
+        setSupportActionBar(mActionBarToolbar);
+        getSupportActionBar().setTitle("Home");
+        getSupportActionBar().setSubtitle("Enter A Game");
+        mActionBarToolbar.setTitleTextColor(Color.WHITE);
+        mActionBarToolbar.setSubtitleTextColor(Color.WHITE);
 
 
 

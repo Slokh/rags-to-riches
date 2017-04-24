@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,89 +9,58 @@
     android:background="#FF388E3C"
     android:weightSum="1">
 
-    <Button
-        android:id="@+id/button2"
-        android:textSize="@dimen/font_size"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_weight="1"
-        android:text="Find Public Game"
-        />
+
+    <include
+        android:id="@+id/app_bar"
+        layout="@layout/app_bar"/>
 
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageButton
-            android:id="@+id/goGameModeActivity"
-            android:layout_width="match_parent"
-            android:layout_height="165dp"
-            android:background="@color/colorPrimaryDark"
-            android:elevation="0dp"
-            android:scaleType="centerInside"
-            android:text="Game Modes"
-            android:textAlignment="center"
-            app:srcCompat="@drawable/android"
-            tools:text="@string/Game_Modes"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="89dp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:text="Game Modes"
-            android:textAlignment="center"
-            android:textColor="@android:color/background_dark"
-            android:textSize="12sp"
-            android:typeface="normal"
-            android:visibility="visible"
-            tools:text="Game Modes"
-            android:layout_marginBottom="68dp"
-            android:layout_alignBottom="@+id/goGameModeActivity"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:id="@+id/textView4" />
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="350dp"
             android:layout_height="200dp"
             app:srcCompat="@drawable/ragstoricheslogo"
-            android:layout_above="@+id/goGameModeActivity"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="23dp" />
+            android:layout_marginBottom="28dp"
+            android:layout_above="@+id/findPublicGame"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
         <Button
             android:id="@+id/findPublicGame"
             android:layout_width="250dp"
             android:layout_height="60dp"
+            android:text="Find Public Game"
+            android:layout_above="@+id/createGame"
             android:layout_alignLeft="@+id/createGame"
-            android:layout_alignStart="@+id/createGame"
-            android:layout_alignTop="@+id/goGameModeActivity"
-            android:text="Find Public Game" />
+            android:layout_alignStart="@+id/createGame" />
 
         <Button
             android:id="@+id/createGame"
             android:layout_width="250dp"
             android:layout_height="60dp"
-            android:layout_below="@+id/findPublicGame"
-            android:layout_centerHorizontal="true"
-            android:text="Create Private Game" />
+            android:text="Create Private Game"
+            android:layout_marginBottom="143dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
 
         <Button
             android:id="@+id/joinGame"
             android:layout_width="250dp"
             android:layout_height="60dp"
             android:text="Join Private Game"
-            android:layout_below="@+id/createGame"
+            android:layout_alignTop="@+id/createGame"
             android:layout_alignLeft="@+id/createGame"
-            android:layout_alignStart="@+id/createGame" />
+            android:layout_alignStart="@+id/createGame"
+            android:layout_marginTop="61dp" />
     </RelativeLayout>
 
-</LinearLayout>
+</RelativeLayout>

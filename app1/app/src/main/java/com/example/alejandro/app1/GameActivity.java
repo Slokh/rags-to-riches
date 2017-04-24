@@ -48,7 +48,7 @@ import com.example.alejandro.app1.models.Portfolio;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
-import android.support.v7.widget.Toolbar;
+
 import android.widget.TextView;
 
 import static android.R.attr.data;
@@ -65,6 +65,8 @@ import android.widget.PopupWindow;
 import android.view.LayoutInflater;
 import android.widget.EditText;
 import android.content.Intent;
+import android.support.v7.widget.Toolbar;
+import android.support.v7.app.AppCompatActivity;
 
 /**
  * GameActivity class handles all functions in regards to the game itself
@@ -94,6 +96,8 @@ public class GameActivity extends MainMenuActivity {
     int turn = 1;
     double initialbalance = 5000;
 
+    private Toolbar toolbar;
+
     String code;
 
     /**
@@ -103,24 +107,28 @@ public class GameActivity extends MainMenuActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-/*
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("");
+
+        toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
 
-*/
 
 
-
-
-
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         super.onCreate(savedInstanceState);
+
+
+
         setContentView(R.layout.activity_game);
+
+
+
+
+
+
+
+
+
         final Bundle extras = getIntent().getExtras();
         account = new Account(extras.getInt("id"), extras.getString("email"), extras.getString("username"), extras.getString("password"));
         code = extras.getString("code");
@@ -140,17 +148,15 @@ public class GameActivity extends MainMenuActivity {
 
 
         balanceAmount = (TextView) findViewById(R.id.balanceAmount);
-        balanceAmount.setText("Balance: " + portfolio.getBalanceText());
+        balanceAmount.setText(portfolio.getBalanceText());
 
         final Context context = getApplicationContext();
         displayAdapter = new CompanyAdapter(GameActivity.this, context, account, portfolio, companies, turnvalue);
 
         ListView listView = (ListView) findViewById(R.id.companyList);
         listView.setAdapter(displayAdapter);
-        balanceAmount.setText("Your Balance: " + portfolio.getBalance());
+        balanceAmount.setText((portfolio.getBalanceText()));
         listView.setBackgroundColor(Color.WHITE);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        getSupportActionBar().setHomeButtonEnabled(false);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -194,8 +200,8 @@ public class GameActivity extends MainMenuActivity {
 
 
 
-
-        mQuitButton = (Button) findViewById(R.id.goMainMenuActivity);
+/*
+        mQuitButton = (Button) findViewById(R.id.goma);
         mQuitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -203,7 +209,7 @@ public class GameActivity extends MainMenuActivity {
                 startActivity(i);
             }
         });
-
+*/
         mPortfolioButton = (Button) findViewById(R.id.portfolioButton);
         mPortfolioButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -310,7 +316,7 @@ public class GameActivity extends MainMenuActivity {
                     try {
                         Thread.sleep(1000);
                         runOnUiThread(new Runnable() { @Override public void run() {
-                            balanceAmount.setText("Balance: " + portfolio.getBalanceText());
+                            balanceAmount.setText(portfolio.getBalanceText());
                         }
                         });
                     }catch(InterruptedException e ){
