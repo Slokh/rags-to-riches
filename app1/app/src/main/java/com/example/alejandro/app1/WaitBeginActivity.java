@@ -57,7 +57,7 @@ public class WaitBeginActivity extends MainMenuActivity {
                         // Sleep for 200 milliseconds.
                         //Just to display the progress slowly
                         Thread.sleep(5000);
-                        if (playerCount() == 1){
+                        if (playerCount() == 2){
                             waiting = false;
                             startActivity(i);
                         }

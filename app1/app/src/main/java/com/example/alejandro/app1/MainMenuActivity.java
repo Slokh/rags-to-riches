@@ -54,6 +54,7 @@ public class MainMenuActivity extends AppCompatActivity {
     Toolbar mActionBarToolbar;
     private Button mCreateGame = null;
     private Button mJoinGame = null;
+    private Button mFindGame = null;
 
     /**
      * General initializer of Android Activity
@@ -80,6 +81,21 @@ public class MainMenuActivity extends AppCompatActivity {
         mActionBarToolbar.setSubtitleTextColor(Color.WHITE);
 
 
+        mFindGame = (Button) findViewById(R.id.findPublicGame);
+        mFindGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View view) {
+                Intent i = new Intent(view.getContext(), QueueActivity.class);
+                i.putExtra("id", extras.getInt("id"));
+                i.putExtra("email", extras.getString("email"));
+                i.putExtra("username", extras.getString("username"));
+                i.putExtra("password", extras.getString("password"));
+                createPortfolio(extras.getInt("id"));
+                startActivity(i);
+
+            }
+
+        });
 
 
         // final Bundle extras = getIntent().getExtras();
