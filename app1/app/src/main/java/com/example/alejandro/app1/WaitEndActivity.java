@@ -3,7 +3,6 @@ package com.example.alejandro.app1;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ProgressBar;
 
 import java.io.BufferedReader;
@@ -16,12 +15,14 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLEncoder;
 
 import static android.R.attr.id;
 
 /**
- * Created by kp605 on 4/21/17.
+ * WaitEndActivity class handles the user waiting for other players in the game
+ * to finish the game
+ *
+ * Created by Kartik on 4/21/2017.
  */
 
 public class WaitEndActivity extends MainMenuActivity {
@@ -29,25 +30,22 @@ public class WaitEndActivity extends MainMenuActivity {
     private ProgressBar spinner;
     public boolean waiting = true;
 
-    int id = 0;
     /**
      * General initializer of Android Activity
      * @param savedInstanceState    saved Instance of previous activity
      */
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wait_end);
 
         final Bundle extras = getIntent().getExtras();
+
         spinner=(ProgressBar)findViewById(R.id.progressBar);
         spinner.setVisibility(View.VISIBLE);
 
-        id = extras.getInt("id");
-
         final Intent i = new Intent(this, EndGameActivity.class);
-        i.putExtra("id", id);
+        i.putExtra("id", extras.getInt("id"));
         i.putExtra("email", extras.getString("email"));
         i.putExtra("username", extras.getString("username"));
         i.putExtra("password", extras.getString("password"));
@@ -55,27 +53,29 @@ public class WaitEndActivity extends MainMenuActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                while (waiting) {
-                    try {
-                        // Sleep for 200 milliseconds.
-                        //Just to display the progress slowly
-                        Thread.sleep(1000);
-                        if (playerCount() == 2){
-                            waiting = false;
-                            Thread.sleep(5000);
-                            startActivity(i);
-                        }
-
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+            while (waiting) {
+                try {
+                    // Sleep for 200 milliseconds.
+                    //Just to display the progress slowly
+                    Thread.sleep(1000);
+                    if (playerCount() == 2){
+                        waiting = false;
+                        Thread.sleep(5000);
+                        startActivity(i);
                     }
-                } // while loop
-            } // run()
-        }).start();
 
-
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } // while loop
+        } // run()
+    }).start();
     }
 
+    /**
+     * Gets the amount of players waiting to finish the game
+     * @return  amount of players waiting
+     */
     public int playerCount() {
         try {
             URL url = new URL("http://parallel.gg/rags-to-riches/end-count.php");
@@ -108,5 +108,4 @@ public class WaitEndActivity extends MainMenuActivity {
         }
         return 0;
     }
-
 }

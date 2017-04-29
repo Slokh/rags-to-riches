@@ -1,40 +1,20 @@
 package com.example.alejandro.app1;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.pm.PackageManager;
 import android.os.StrictMode;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.app.LoaderManager.LoaderCallbacks;
-
-import android.content.CursorLoader;
-import android.content.Loader;
 import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.AsyncTask;
-
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+
+import static com.example.alejandro.app1.R.id.confirmpassword;
+import static com.example.alejandro.app1.R.id.email;
+import static com.example.alejandro.app1.R.id.username;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -47,24 +27,13 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-
-import static android.Manifest.permission.READ_CONTACTS;
-import static com.example.alejandro.app1.R.id.confirmpassword;
-import static com.example.alejandro.app1.R.id.email;
-import static com.example.alejandro.app1.R.id.username;
-
 
 /**
+ * RegisterActivity class handles all functions regarding registering a user into our system.
+ *
  * Created by alejandro on 3/16/2017.
  */
 
-
-/**
- * RegisterActivity class handles all functions in regards to registering a user into our system
- */
 public class RegisterActivity extends LoginActivity{
 
     private Button mRegister = null;
@@ -79,7 +48,9 @@ public class RegisterActivity extends LoginActivity{
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_register);
 
         mEmailView = (EditText) findViewById(email);
@@ -91,20 +62,20 @@ public class RegisterActivity extends LoginActivity{
         mRegister.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(final View view) {
-                if(attemptRegister() && attemptInsert()) {
-                    AlertDialog alertDialog = new AlertDialog.Builder(RegisterActivity.this).create();
-                    alertDialog.setTitle("Success!");
-                    alertDialog.setMessage("Account successfully created");
-                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    Intent i = new Intent(view.getContext(),MainMenuActivity.class);
-                                    startActivity(i);
-                                    dialog.dismiss();
-                                }
-                            });
-                    alertDialog.show();
-                }
+            if(attemptRegister() && attemptInsert()) {
+                AlertDialog alertDialog = new AlertDialog.Builder(RegisterActivity.this).create();
+                alertDialog.setTitle("Success!");
+                alertDialog.setMessage("Account successfully created");
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent i = new Intent(view.getContext(),MainMenuActivity.class);
+                        startActivity(i);
+                        dialog.dismiss();
+                    }
+                });
+                alertDialog.show();
+            }
             }
         });
     }
@@ -113,15 +84,13 @@ public class RegisterActivity extends LoginActivity{
      * Validates the user's information based on our account creation constraints
      * @return whether the user entered the correct information to register
      */
-
     private boolean attemptRegister() {
-        // Reset errors.
+
         mEmailView.setError(null);
         mUsernameView.setError(null);
         mPasswordView.setError(null);
         mConfirmPasswordView.setError(null);
 
-        // Store values at the time of the login attempt.
         String email = mEmailView.getText().toString();
         String username = mUsernameView.getText().toString();
         String password = mPasswordView.getText().toString();
@@ -129,7 +98,6 @@ public class RegisterActivity extends LoginActivity{
 
         View focusView = null;
 
-        // Check for a valid email address.
         if (TextUtils.isEmpty(email)) {
             mEmailView.setError(getString(R.string.error_field_required));
             focusView = mEmailView;
@@ -142,7 +110,6 @@ public class RegisterActivity extends LoginActivity{
             return false;
         }
 
-        // Check for a valid username, if the user entered one.
         if (TextUtils.isEmpty(username)) {
             mUsernameView.setError(getString(R.string.error_field_required));
             focusView = mUsernameView;
@@ -155,7 +122,6 @@ public class RegisterActivity extends LoginActivity{
             return false;
         }
 
-        // Check for a valid password, if the user entered one.
         if (TextUtils.isEmpty(password)) {
             mPasswordView.setError(getString(R.string.error_field_required));
             focusView = mPasswordView;
@@ -168,7 +134,6 @@ public class RegisterActivity extends LoginActivity{
             return false;
         }
 
-        // Check for a valid confirm password, if the user entered one.
         if (TextUtils.isEmpty(confirmpassword)) {
             mConfirmPasswordView.setError(getString(R.string.error_field_required));
             focusView = mConfirmPasswordView;
@@ -181,7 +146,6 @@ public class RegisterActivity extends LoginActivity{
             return false;
         }
 
-        // Check if passwords match
         if (!password.equals(confirmpassword)) {
             mPasswordView.setError(getString(R.string.error_different_password));
             mConfirmPasswordView.setError(getString(R.string.error_different_password));
@@ -199,7 +163,6 @@ public class RegisterActivity extends LoginActivity{
      * @return whether the account was able to be entered into the database
      */
     private boolean attemptInsert() {
-        // Reset errors.
         mEmailView.setError(null);
 
         View focusView = null;
@@ -207,7 +170,6 @@ public class RegisterActivity extends LoginActivity{
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        // Store values at the time of the login attempt.
         String email = mEmailView.getText().toString();
         String username = mUsernameView.getText().toString();
         String password = mPasswordView.getText().toString();

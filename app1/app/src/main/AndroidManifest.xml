@@ -84,19 +84,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".GameModeActivity"
-            android:label="@string/title_activity_game_mode"
-            android:parentActivityName=".MainMenuActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.alejandro.app1.MainMenuActivity" />
-        </activity>
-        <activity
-            android:name=".GameResultsActivity"
-            android:label="@string/title_activity_game_results"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
 
     </application>
 

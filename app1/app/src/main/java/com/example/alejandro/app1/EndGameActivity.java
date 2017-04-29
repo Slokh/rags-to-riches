@@ -16,9 +16,11 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLEncoder;
 
 /**
+ * EndGameActivity handles all functions regarding the end-game display. Once the game has ended,
+ * this class is responsible for displaying the end-game results and showcasing the winner
+ *
  * Created by Kartik on 4/22/2017.
  */
 
@@ -28,17 +30,23 @@ public class EndGameActivity extends MainMenuActivity {
     TextView secondName;
     private Button backButton = null;
 
+    /**
+     * General initializer of Android Activity
+     * @param savedInstanceState    saved Instance of previous activity
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_end_game);
 
         final Bundle extras = getIntent().getExtras();
+
         firstName = (TextView) findViewById(R.id.firstName);
         secondName = (TextView) findViewById(R.id.secondName);
         backButton = (Button) findViewById(R.id.backButton);
 
-        setResults();
+        getResults();
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,14 +57,15 @@ public class EndGameActivity extends MainMenuActivity {
                 i.putExtra("username", extras.getString("username"));
                 i.putExtra("password", extras.getString("password"));
                 startActivity(i);
-                // attemptLogin();
             }
 
         });
     }
 
-
-    public void setResults() {
+    /**
+     * Get the results from the Database at the end of the game
+     */
+    public void getResults() {
         try {
             URL url = new URL("http://parallel.gg/rags-to-riches/get-results.php");
             HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
@@ -77,14 +86,16 @@ public class EndGameActivity extends MainMenuActivity {
             while((line = bufferedReader.readLine())!= null) {
                 result += line;
             }
-            String[] players = result.split("/");
-            firstName.setText(players[0].split(",")[0]+"\nBalance: $ "+players[0].split(",")[1]);
-            if(players[1].length() > 1) {
-                secondName.setText(players[1].split(",")[0]+"\nBalance: $ "+players[1].split(",")[1]);
-            }
             bufferedReader.close();
             inputStream.close();
             httpURLConnection.disconnect();
+
+            String[] players = result.split("/");
+
+            firstName.setText(players[0].split(",")[0]+"\nBalance: $ "+players[0].split(",")[1]);
+
+            secondName.setText(players[1].split(",")[0]+"\nBalance: $ "+players[1].split(",")[1]);
+
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {

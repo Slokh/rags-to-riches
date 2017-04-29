@@ -3,7 +3,6 @@ package com.example.alejandro.app1;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ProgressBar;
 
 import java.io.BufferedReader;
@@ -16,10 +15,12 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLEncoder;
 
 /**
- * Created by kp605 on 4/21/17.
+ * WaitBeginActivity class handles the user waiting for other players in the game
+ * to be ready to begin the game
+ *
+ * Created by Kartik on 4/21/2017.
  */
 
 public class WaitBeginActivity extends MainMenuActivity {
@@ -31,14 +32,15 @@ public class WaitBeginActivity extends MainMenuActivity {
      * General initializer of Android Activity
      * @param savedInstanceState    saved Instance of previous activity
      */
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_wait_begin);
 
-
         final Bundle extras = getIntent().getExtras();
+
         spinner=(ProgressBar)findViewById(R.id.progressBar);
         spinner.setVisibility(View.VISIBLE);
 
@@ -52,26 +54,26 @@ public class WaitBeginActivity extends MainMenuActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                while (waiting) {
-                    try {
-                        // Sleep for 200 milliseconds.
-                        //Just to display the progress slowly
-                        Thread.sleep(1000);
-                        if (playerCount() == 2){
-                            waiting = false;
-                            startActivity(i);
-                        }
-
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+            while (waiting) {
+                try {
+                    Thread.sleep(1000);
+                    if (playerCount() == 2){
+                        waiting = false;
+                        startActivity(i);
                     }
-                } // while loop
-            } // run()
-        }).start();
 
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        } // run()
+    }).start();
     }
 
-
+    /**
+     * Gets the amount of players ready to play the game
+     * @return  amount of players ready
+     */
     public int playerCount() {
         try {
             URL url = new URL("http://parallel.gg/rags-to-riches/begin-count.php");
@@ -104,6 +106,4 @@ public class WaitBeginActivity extends MainMenuActivity {
         }
         return 0;
     }
-
-
 }

@@ -1,18 +1,9 @@
 package com.example.alejandro.app1;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -27,26 +18,22 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.security.SecureRandom;
-import java.util.Random;
-
-import static android.R.attr.id;
 
 /**
+ * QueueActivity class handles all functions regarding waiting for a public game to be found.
+ *
  * Created by Kartik on 4/24/2017.
  */
 
-/**
- * MainMenuActivity class handles all functions in regards to navigating our main menu screen
- */
 public class QueueActivity extends MainMenuActivity {
 
+    boolean waiting = true;
+    int id = 0;
 
     TextView text;
     private ProgressBar spinner;
     private Button mBackButton = null;
-    boolean waiting = true;
-    int id = 0;
+
     /**
      * General initializer of Android Activity
      * @param savedInstanceState    saved Instance of previous activity
@@ -54,17 +41,15 @@ public class QueueActivity extends MainMenuActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
-        //  setActivityBackgroundColor(79B144);
-
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_queue);
 
         final Bundle extras = getIntent().getExtras();
+        id = extras.getInt("id");
+
         spinner=(ProgressBar)findViewById(R.id.progressBar);
         spinner.setVisibility(View.VISIBLE);
-        id = extras.getInt("id");
 
         text = (TextView) findViewById(R.id.queueText);
 
@@ -86,7 +71,6 @@ public class QueueActivity extends MainMenuActivity {
                 i.putExtra("username", extras.getString("username"));
                 i.putExtra("password", extras.getString("password"));
                 startActivity(i);
-                // attemptLogin();
             }
 
         });
@@ -107,12 +91,16 @@ public class QueueActivity extends MainMenuActivity {
 
                         }
                     });
-                } // while loop
-            } // run()
+                }
+            }
         }).start();
 
     }
 
+    /**
+     * Update the game info in the database with a new private game session
+     * @param code  Code used by private game creator
+     */
     public void updateGameInfo(String code) {
         try {
             URL url = new URL("http://parallel.gg/rags-to-riches/game-info.php");
@@ -146,7 +134,10 @@ public class QueueActivity extends MainMenuActivity {
         }
     }
 
-
+    /**
+     * Create portfolio for the user in the database
+     * @param id    id of the user's account
+     */
     public void createPortfolio(int id) {
         try {
             URL url = new URL("http://parallel.gg/rags-to-riches/create-portfolio.php");
@@ -178,7 +169,10 @@ public class QueueActivity extends MainMenuActivity {
         }
     }
 
-
+    /**
+     * Get the amount of people currently in queue
+     * @return  amunt of people in queue
+     */
     public int inQueue() {
         try {
             URL url = new URL("http://parallel.gg/rags-to-riches/in-queue.php");

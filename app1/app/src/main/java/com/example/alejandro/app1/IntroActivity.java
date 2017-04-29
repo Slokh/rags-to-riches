@@ -10,9 +10,10 @@ import com.example.alejandro.app1.models.Account;
 import com.github.paolorotolo.appintro.AppIntro;
 import com.github.paolorotolo.appintro.AppIntroFragment;
 
-import static java.security.AccessController.getContext;
-
 /**
+ * IntroActivity handles the tutorial interface shown to new players when they
+ * first register and enter the game.
+ *
  * Created by Kartik on 4/24/2017.
  */
 
@@ -20,6 +21,10 @@ public class IntroActivity extends AppIntro {
 
     Account account;
 
+    /**
+     * General initializer of Android Activity
+     * @param savedInstanceState    saved Instance of previous activity
+     */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

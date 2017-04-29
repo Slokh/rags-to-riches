@@ -4,13 +4,10 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
-
 import android.content.Intent;
-
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -30,26 +27,15 @@ import java.net.URLEncoder;
 import java.security.SecureRandom;
 import java.util.Random;
 import android.support.v7.widget.Toolbar;
-import android.support.v7.app.AppCompatActivity;
-import static android.os.Build.VERSION_CODES.M;
-
-//package com.example.alejandro.app1;
-
-
-
-
 
 /**
+ * MainMenuActivity class handles all functions regarding to navigating our Main Menu screen,
+ * mainly finding games or checking Achievements.
+ *
  * Created by alejandro on 3/17/2017.
- */
-
-/**
- * MainMenuActivity class handles all functions in regards to navigating our main menu screen
  */
 public class MainMenuActivity extends AppCompatActivity {
 
-    private ImageButton mSetting = null;
-    private ImageButton mGameMode = null;
     EditText editText = null;
     Toolbar mActionBarToolbar;
     private Button mCreateGame = null;
@@ -63,15 +49,13 @@ public class MainMenuActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
-      //  setActivityBackgroundColor(79B144);
-
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_mainmenu);
+
         final Bundle extras = getIntent().getExtras();
 
-
+        grabAchievements(extras.getInt("id"));
 
         mActionBarToolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(mActionBarToolbar);
@@ -80,51 +64,46 @@ public class MainMenuActivity extends AppCompatActivity {
         mActionBarToolbar.setTitleTextColor(Color.WHITE);
         mActionBarToolbar.setSubtitleTextColor(Color.WHITE);
 
-
         mFindGame = (Button) findViewById(R.id.findPublicGame);
         mFindGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-                Intent i = new Intent(view.getContext(), QueueActivity.class);
-                i.putExtra("id", extras.getInt("id"));
-                i.putExtra("email", extras.getString("email"));
-                i.putExtra("username", extras.getString("username"));
-                i.putExtra("password", extras.getString("password"));
-                createPortfolio(extras.getInt("id"));
-                startActivity(i);
+            Intent i = new Intent(view.getContext(), QueueActivity.class);
+            i.putExtra("id", extras.getInt("id"));
+            i.putExtra("email", extras.getString("email"));
+            i.putExtra("username", extras.getString("username"));
+            i.putExtra("password", extras.getString("password"));
+            createPortfolio(extras.getInt("id"));
+            startActivity(i);
 
             }
 
         });
 
-
-        // final Bundle extras = getIntent().getExtras();
-
         mCreateGame = (Button) findViewById(R.id.createGame);
         mCreateGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-                final String code = generateCode(4);
-                AlertDialog alertDialog = new AlertDialog.Builder(MainMenuActivity.this).create();
-                alertDialog.setTitle("Invite Friends");
-                alertDialog.setMessage("You're game code is: " + code);
-                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent i = new Intent(view.getContext(), WaitBeginActivity.class);
-                                i.putExtra("id", extras.getInt("id"));
-                                i.putExtra("email", extras.getString("email"));
-                                i.putExtra("username", extras.getString("username"));
-                                i.putExtra("password", extras.getString("password"));
-                                i.putExtra("code", code);
-                                updateGameInfo(code);
-                                createPortfolio(extras.getInt("id"));
-                                startActivity(i);
-                                dialog.dismiss();
-                            }
-                        });
-                alertDialog.show();
-
+            final String code = generateCode(4);
+            AlertDialog alertDialog = new AlertDialog.Builder(MainMenuActivity.this).create();
+            alertDialog.setTitle("Invite Friends");
+            alertDialog.setMessage("You're game code is: " + code);
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent i = new Intent(view.getContext(), WaitBeginActivity.class);
+                        i.putExtra("id", extras.getInt("id"));
+                        i.putExtra("email", extras.getString("email"));
+                        i.putExtra("username", extras.getString("username"));
+                        i.putExtra("password", extras.getString("password"));
+                        i.putExtra("code", code);
+                        updateGameInfo(code);
+                        createPortfolio(extras.getInt("id"));
+                        startActivity(i);
+                        dialog.dismiss();
+                    }
+                });
+            alertDialog.show();
             }
 
         });
@@ -133,107 +112,32 @@ public class MainMenuActivity extends AppCompatActivity {
         mJoinGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-                editText = new EditText(view.getContext());
-                AlertDialog alertDialog = new AlertDialog.Builder(MainMenuActivity.this).create();
-                alertDialog.setTitle("Enter Code");
-                alertDialog.setMessage("Enter the game code: ");
-                alertDialog.setView(editText);
-                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                String code = editText.getText().toString();
-                                if(checkCode(code)) {
-                                    Intent i = new Intent(view.getContext(), WaitBeginActivity.class);
-                                    i.putExtra("id", extras.getInt("id"));
-                                    i.putExtra("email", extras.getString("email"));
-                                    i.putExtra("username", extras.getString("username"));
-                                    i.putExtra("password", extras.getString("password"));
-                                    i.putExtra("code", code);
-                                    createPortfolio(extras.getInt("id"));
-                                    startActivity(i);
-                                }
-                                dialog.dismiss();
-                            }
-                        });
-                alertDialog.show();
-
+            editText = new EditText(view.getContext());
+            AlertDialog alertDialog = new AlertDialog.Builder(MainMenuActivity.this).create();
+            alertDialog.setTitle("Enter Code");
+            alertDialog.setMessage("Enter the game code: ");
+            alertDialog.setView(editText);
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        String code = editText.getText().toString();
+                        if(checkCode(code)) {
+                            Intent i = new Intent(view.getContext(), WaitBeginActivity.class);
+                            i.putExtra("id", extras.getInt("id"));
+                            i.putExtra("email", extras.getString("email"));
+                            i.putExtra("username", extras.getString("username"));
+                            i.putExtra("password", extras.getString("password"));
+                            i.putExtra("code", code);
+                            createPortfolio(extras.getInt("id"));
+                            startActivity(i);
+                        }
+                        dialog.dismiss();
+                    }
+                });
+            alertDialog.show();
             }
 
         });
-
-
-
-
-
-
-
-
-
-
-
-        /*
-        mGameMode = (ImageButton) findViewById(R.id.goGameModeActivity);
-        mGameMode.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent a = new Intent(view.getContext(), MainMenuActivity.class);
-                a.putExtra("id", extras.getInt("id"));
-                a.putExtra("email", extras.getString("email"));
-                a.putExtra("username", extras.getString("username"));
-                a.putExtra("password", extras.getString("password"));
-                startActivity(a);
-                // attemptLogin();
-            }
-
-        });
-        */
-        //new buttons part
-
-
-       // private Button mBackButton = null;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-        mSetting = (ImageButton) findViewById(R.id.goSettingsActivity);
-        mSetting.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(view.getContext(), SettingsActivity.class);
-                startActivity(i);
-                // attemptLogin();
-                }
-
-        });
-*/
-    }
-
-
-    public void setActivityBackgroundColor(int color) {
-        View view = this.getWindow().getDecorView();
-        view.setBackgroundColor(color);
     }
 
     @Override
@@ -243,14 +147,19 @@ public class MainMenuActivity extends AppCompatActivity {
 
     }
 
-//    @Override
+    /**
+     * Handles user interaction on options menu
+     * @param item  Item selected by user
+     * @return      true on success
+     */
     public boolean onOptionsItemSelected(MenuItem item) {
+
         switch(item.getItemId()){
             case R.id.action_settings:
-
                 Intent k = new Intent(MainMenuActivity.this, SettingsActivity.class);
                 startActivity(k);
                 return true;
+
             case R.id.action_achievements:
                 final Bundle extras = getIntent().getExtras();
                 Intent l = new Intent(MainMenuActivity.this, AchievementsActivity.class);
@@ -260,36 +169,17 @@ public class MainMenuActivity extends AppCompatActivity {
                 l.putExtra("password", extras.getString("password"));
                 startActivity(l);
                 return true;
+
             default:
-            // If we got here, the user's action was not recognized.
-            // Invoke the superclass to handle it.
             return super.onOptionsItemSelected(item);
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // all private game stuff
-
-
-
+    /**
+     * Check if user entered the right code for the private game
+     * @param code  Code entered by user
+     * @return      true on success, false on failure
+     */
     public boolean checkCode(String code) {
         try {
             URL url = new URL("http://parallel.gg/rags-to-riches/check-code.php");
@@ -315,9 +205,7 @@ public class MainMenuActivity extends AppCompatActivity {
             inputStream.close();
             httpURLConnection.disconnect();
             System.out.println(result);
-            if(result.trim().equals("TRUE")) {
-                return true;
-            }
+            if(result.trim().equals("TRUE")) return true;
             return false;
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -327,7 +215,10 @@ public class MainMenuActivity extends AppCompatActivity {
         return false;
     }
 
-
+    /**
+     * Update the game info in the database with a new private game session
+     * @param code  Code used by private game creator
+     */
     public void updateGameInfo(String code) {
         try {
             URL url = new URL("http://parallel.gg/rags-to-riches/game-info.php");
@@ -361,7 +252,10 @@ public class MainMenuActivity extends AppCompatActivity {
         }
     }
 
-
+    /**
+     * Create portfolio for the user in the database
+     * @param id    id of the user's account
+     */
     public void createPortfolio(int id) {
         try {
             URL url = new URL("http://parallel.gg/rags-to-riches/create-portfolio.php");
@@ -393,6 +287,46 @@ public class MainMenuActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Grab the achievements for a particular user
+     * @param id    id of the user's account
+     */
+    public void grabAchievements(int id) {
+        try {
+            URL url = new URL("http://parallel.gg/rags-to-riches/grab-achievements.php");
+            HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+            httpURLConnection.setRequestMethod("POST");
+            httpURLConnection.setDoOutput(true);
+            httpURLConnection.setDoInput(true);
+            OutputStream outputStream = httpURLConnection.getOutputStream();
+            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+            String post_data = URLEncoder.encode("id","UTF-8")+"="+URLEncoder.encode("" + id,"UTF-8");
+            bufferedWriter.write(post_data);
+            bufferedWriter.flush();
+            bufferedWriter.close();
+            outputStream.close();
+            InputStream inputStream = httpURLConnection.getInputStream();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"iso-8859-1"));
+            String result="";
+            String line="";
+            while((line = bufferedReader.readLine())!= null) {
+                result += line;
+            }
+            bufferedReader.close();
+            inputStream.close();
+            httpURLConnection.disconnect();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Generate a random character alphanumeric code to be used as an invite code
+     * @param length    length of code
+     * @return          String containing the code
+     */
     public static String generateCode(int length) {
         char[]characterSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
         Random random = new SecureRandom();
@@ -405,5 +339,3 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
 }
-
-
