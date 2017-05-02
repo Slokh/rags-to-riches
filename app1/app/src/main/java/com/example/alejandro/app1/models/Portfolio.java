@@ -1,12 +1,13 @@
 package com.example.alejandro.app1.models;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.text.NumberFormat;
+
 /**
- * Created by Kartik on 3/17/2017.
+ * Written by: Kartik Patel
+ *
  * Portfolio class to store information regarding a user's portfolio
  */
 

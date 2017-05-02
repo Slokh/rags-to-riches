@@ -2,8 +2,9 @@ package com.example.alejandro.app1.models;
 
 import java.text.NumberFormat;
 
-/**
- * Created by Kartik on 3/17/2017.
+ /**
+  * Written by: Kartik Patel
+  *
  * Company class to store company information
  */
 

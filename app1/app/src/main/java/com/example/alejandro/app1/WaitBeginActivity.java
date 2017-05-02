@@ -17,10 +17,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
+ * Written by: Kartik Patel
+ * Tested/Debugged by: Kartik Patel
+ *
  * WaitBeginActivity class handles the user waiting for other players in the game
  * to be ready to begin the game
- *
- * Created by Kartik on 4/21/2017.
  */
 
 public class WaitBeginActivity extends MainMenuActivity {

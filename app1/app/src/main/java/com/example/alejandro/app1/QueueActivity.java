@@ -20,9 +20,10 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 /**
- * QueueActivity class handles all functions regarding waiting for a public game to be found.
+ * Written by: Kartik Patel
+ * Tested/Debugged by: Kartik Patel
  *
- * Created by Kartik on 4/24/2017.
+ * QueueActivity class handles all functions regarding waiting for a public game to be found.
  */
 
 public class QueueActivity extends MainMenuActivity {

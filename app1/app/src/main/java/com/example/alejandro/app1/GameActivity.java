@@ -47,11 +47,13 @@ import static android.R.id.message;
 
 
 /**
+ * Written by: Kartik Patel, Deep Patel, Alejandro Aguilar, Arjun Ohri
+ * Tested/Debugged by: Kartik Patel, Deep Patel
+ *
  * GameActivity class handles all functions regarding the actual game itself. It is
  * responsible for continuously updating the database based on user's transactions as well
  * as displaying the correct information to the user and handling user input
  *
- * Created by alejandro on 3/17/2017.
  */
 
 public class GameActivity extends MainMenuActivity {

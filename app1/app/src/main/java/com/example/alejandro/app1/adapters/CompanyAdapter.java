@@ -26,8 +26,10 @@ import java.util.List;
 
 
 /**
+ * Written by: Kartik Patel
+ * Tested/Debugged by: Kartik Patel
+ *
  * Adapts list of companies into ListView
- * Created by Kartik on 4/22/2017.
  */
 public class CompanyAdapter extends GenericArrayAdapter<Company> implements NumberPicker.OnValueChangeListener {
 

@@ -13,8 +13,10 @@ import com.example.alejandro.app1.models.Account;
 import java.util.List;
 
 /**
+ * Written by: Kartik Patel
+ * Tested/Debugged by: Kartik Patel
+ *
  * Adapts list of achievements into ListView
- * Created by Kartik on 4/22/2017.
  */
 public class AchievementAdapter extends GenericArrayAdapter<Achievement> {
 

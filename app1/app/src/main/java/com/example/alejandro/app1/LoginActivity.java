@@ -27,9 +27,10 @@ import java.net.URLEncoder;
 
 
 /**
- * LoginActivity class handles all functions regarding logging a user into our system
+ * Written by: Kartik Patel, Alejandro Aguilar, Arjun Ohri
+ * Tested/Debugged by: Kartik Patel, Alejandro Aguilar
  *
- * Created by alejandro on 3/17/2017.
+ * LoginActivity class handles all functions regarding logging a user into our system
  */
 public class LoginActivity extends AppCompatActivity {
 

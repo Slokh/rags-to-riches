@@ -30,11 +30,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Written by: Kartik Patel
+ * Tested/Debugged by: Kartik Patel, Deep Patel
+ *
  * AchievementsActivity class handles all functions regarding pulling achievements
  * from the database and displaying them for the user so that they can track
  * their progress.
- *
- * Created by Kartik on 4/23/2017.
  */
 
 public class AchievementsActivity extends MainMenuActivity {
@@ -52,9 +53,9 @@ public class AchievementsActivity extends MainMenuActivity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
 
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_achievements);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();

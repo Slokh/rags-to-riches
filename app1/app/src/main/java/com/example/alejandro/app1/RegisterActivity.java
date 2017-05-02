@@ -29,9 +29,10 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 /**
- * RegisterActivity class handles all functions regarding registering a user into our system.
+ * Written by: Kartik Patel, Alejandro Aguilar, Arjun Ohri
+ * Tested/Debugged by: Kartik Patel, Alejandro Aguilar
  *
- * Created by alejandro on 3/16/2017.
+ * RegisterActivity class handles all functions regarding registering a user into our system.
  */
 
 public class RegisterActivity extends LoginActivity{

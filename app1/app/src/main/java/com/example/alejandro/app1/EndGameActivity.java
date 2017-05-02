@@ -18,10 +18,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
+ * Written by: Kartik Patel
+ * Tested/Debugged by: Kartik Patel, Deep Patel
+ *
  * EndGameActivity handles all functions regarding the end-game display. Once the game has ended,
  * this class is responsible for displaying the end-game results and showcasing the winner
- *
- * Created by Kartik on 4/22/2017.
  */
 
 public class EndGameActivity extends MainMenuActivity {

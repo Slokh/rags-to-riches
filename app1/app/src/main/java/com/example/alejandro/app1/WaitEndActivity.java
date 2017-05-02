@@ -19,10 +19,11 @@ import java.net.URL;
 import static android.R.attr.id;
 
 /**
+ * Written by: Kartik Patel
+ * Tested/Debugged by: Kartik Patel
+ *
  * WaitEndActivity class handles the user waiting for other players in the game
  * to finish the game
- *
- * Created by Kartik on 4/21/2017.
  */
 
 public class WaitEndActivity extends MainMenuActivity {

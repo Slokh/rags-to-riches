@@ -29,10 +29,11 @@ import java.util.Random;
 import android.support.v7.widget.Toolbar;
 
 /**
+ * Written by: Kartik Patel, Alejandro Aguilar, Deep Patel
+ * Tested/Debugged by: Kartik Patel, Deep Patel
+ *
  * MainMenuActivity class handles all functions regarding to navigating our Main Menu screen,
  * mainly finding games or checking Achievements.
- *
- * Created by alejandro on 3/17/2017.
  */
 public class MainMenuActivity extends AppCompatActivity {
 

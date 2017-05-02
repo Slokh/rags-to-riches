@@ -10,8 +10,10 @@ import android.widget.TextView;
 import java.util.List;
 
 /**
+ * Written by: Kartik Patel
+ * Tested/Debugged by: Kartik Patel
+ *
  * Superclass for AchievementAdapter and Company Adapter
- * Created by Kartik on 3/20/2017.
  */
 public abstract class GenericArrayAdapter<T> extends ArrayAdapter<T> {
 

@@ -11,10 +11,11 @@ import com.github.paolorotolo.appintro.AppIntro;
 import com.github.paolorotolo.appintro.AppIntroFragment;
 
 /**
+ * Written by: Kartik Patel
+ * Tested/Debugged by: Kartik Patel
+ *
  * IntroActivity handles the tutorial interface shown to new players when they
  * first register and enter the game.
- *
- * Created by Kartik on 4/24/2017.
  */
 
 public class IntroActivity extends AppIntro {
